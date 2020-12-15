@@ -1,6 +1,6 @@
 import { getServices, getServiceById, insertService } from '../models/serviceModel.js'
 
-export const showSerVices = (req,res) => {
+export const showServices = (req,res) => {
     getServices((err, results) => {
         if (err) {
             res.send(err);

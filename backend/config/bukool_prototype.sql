@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2020 at 05:15 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Dec 15, 2020 at 08:25 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -60,6 +59,13 @@ CREATE TABLE `event_type` (
   `name` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `event_type`
+--
+
+INSERT INTO `event_type` (`id`, `name`) VALUES
+(1, 'wedding');
+
 -- --------------------------------------------------------
 
 --
@@ -84,8 +90,20 @@ CREATE TABLE `service` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `price` decimal(10,2) NOT NULL
+  `price` decimal(10,2) NOT NULL,
+  `event_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `service`
+--
+
+INSERT INTO `service` (`id`, `name`, `description`, `price`, `event_type_id`) VALUES
+(1, 'Perfect Bliss', 'Photo\r\n– Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop ', '50000.00', 1),
+(2, 'Grey', '– Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop crystal', '30000.00', 1),
+(3, 'White', '– Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 30-page 10×10” premium fine art album (slim pages)\r\n– 2-3 professional photograph', '25000.00', 1),
+(4, 'Brown', '– No prenup session\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 20-page 10×10” premium fine art album (slim pages)\r\n– 2 professional photographers', '20000.00', 1),
+(5, 'Prenup Only', '– Up to 6 hours of photoshoot – Unlimited photos taken on the day – High resolution images professionally edited and supplied with USB for high-quality printing – Prenup slideshow – 2 professional photographers', '10000.00', 0);
 
 -- --------------------------------------------------------
 
@@ -110,7 +128,7 @@ CREATE TABLE `supplier` (
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `user_type` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -120,7 +138,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `user_type`) VALUES
-(2, 'ricardo', '$2b$10$5VnjaHLFi3IK2hwHg8G5nufG5', 'ricardo@gmail.com', 'client');
+(2, 'ricardo', '$2b$10$5VnjaHLFi3IK2hwHg8G5nufG5', 'ricardo@gmail.com', 'client'),
+(3, 'lloyd', '$2b$10$MPea7kFvjRIsylm.rh0h8Ox8qzEyXdjGc/KLRigSPtHDJFP5gR1Fe', 'helloworldxzc@gmail.com', 'client'),
+(4, 'username', 'password', 'email@email.com', ''),
+(5, 'sample', 'wakwak', 'emailagain@gmai.com', '');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +208,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `event_type`
 --
 ALTER TABLE `event_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -199,7 +220,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -211,7 +232,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
