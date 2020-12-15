@@ -1,4 +1,4 @@
-import { getUsers, getUserById } from "../models/accountModel.js";
+import { getUsers, getUserById, insertUser } from "../models/accountModel.js";
 
 export const showUsers = (req,res) => {
     getUsers((err, results) => {
@@ -19,3 +19,12 @@ export const showUserById = (req,res)=>{
     })
 }
 
+export const createUser = (req, res) => {
+    const data = req.body;
+    insertUser(data, (err, results) => {
+        if (err) throw err;
+        else {
+            res.json(results);
+        }
+    })
+}

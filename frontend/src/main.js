@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 
 import App from './App.vue'
 import User from './components/UserList.vue'
+import CreateUser from './components/CreateUser.vue'
+import Services from './components/Services.vue'
+import AddService from './components/AddService.vue'
 
 Vue.use(VueRouter)
 
@@ -11,8 +14,23 @@ Vue.config.productionTip = false
 const routes = [
   {
     name: 'User',
-    path: '/user',
+    path: '/users',
     component: User
+  },
+  {
+    name: 'CreateUser',
+    path: '/register',
+    component: CreateUser
+  },
+  {
+    name: 'Service',
+    path: '/services',
+    component: Services
+  },
+  {
+    name: 'AddService',
+    path: '/addservice',
+    component: AddService
   },
 ]
 

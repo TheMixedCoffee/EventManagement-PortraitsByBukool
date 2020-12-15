@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <a href="/register">Add New User</a>
     <table>
       <thead>
         <th>UID</th>
@@ -37,7 +38,7 @@ export default {
   methods: {
     async getUsers() {
       try {
-        const response = await axios.get("http://localhost:3000/user");
+        const response = await axios.get("http://localhost:3000/users");
         this.users = response.data;
         console.log(this.users);
       } catch (err) {
