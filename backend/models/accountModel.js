@@ -21,7 +21,9 @@ export const getUserById = (id, result) =>{
 }
 
 export const insertUser = (data, result) => {
-    db.query("INSERT INTO user SET ?", [data], (err, results)=> {
+    db.query(`INSERT INTO user (username, password, firstname, lastname, email, user_type, employee_type) VALUES (
+        "${data.username}", '${data.password}', "${data.firstname}", 
+        "${data.lastname}", '${data.email}', 'employee', 'Editor')`, (err, results)=> {
         if (err) {
             console.log(err);
             result(err, null);
@@ -29,4 +31,14 @@ export const insertUser = (data, result) => {
             result(null, results);
         }
     });
+}
+
+export const checkUser = (username, result) => {
+    db.query(`SELECT * FROM user WHERE username = '${username}'`, (err, results) => {
+        if(err) {
+            throw err;
+        } else {
+            result(null, results[0]);
+        }
+    })
 }
