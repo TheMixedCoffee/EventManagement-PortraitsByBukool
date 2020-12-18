@@ -16,8 +16,9 @@ export const showUsers = (req,res) => {
 
 export const showUserById = (req,res)=>{
     getUserById(req.params.id, (err, results) =>{
-        if (err) throw err;
-        if (results.length > 0){
+        if (err) {
+            throw err;
+        } else {
             res.json(results);
         }
     })

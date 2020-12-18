@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2020 at 08:25 PM
+-- Generation Time: Dec 18, 2020 at 05:34 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -34,6 +34,7 @@ CREATE TABLE `event` (
   `event_details` varchar(255) NOT NULL,
   `contact_number` varchar(32) NOT NULL,
   `event_type_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `event_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -129,19 +130,26 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `user_type` varchar(32) NOT NULL
+  `user_type` varchar(32) NOT NULL,
+  `employee_type` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `user_type`) VALUES
-(2, 'ricardo', '$2b$10$5VnjaHLFi3IK2hwHg8G5nufG5', 'ricardo@gmail.com', 'client'),
-(3, 'lloyd', '$2b$10$MPea7kFvjRIsylm.rh0h8Ox8qzEyXdjGc/KLRigSPtHDJFP5gR1Fe', 'helloworldxzc@gmail.com', 'client'),
-(4, 'username', 'password', 'email@email.com', ''),
-(5, 'sample', 'wakwak', 'emailagain@gmai.com', '');
+INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `user_type`, `employee_type`) VALUES
+(3, 'lloyd', '$2b$10$MPea7kFvjRIsylm.rh0h8Ox8qzEyXdjGc/KLRigSPtHDJFP5gR1Fe', '', '', 'helloworldxzc@gmail.com', 'client', ''),
+(7, 'maquisel', '$2b$10$9nDaU7uL0xb5riKsZVMCeenJspX9f997HjuskixBzPQ/czIvYDnLC', 'Marc Lloyd', 'Quisel', 'email.email.com', 'client', ''),
+(8, 'manager1', '$2b$10$dBhOFDLmDU3EYKeFMmkFcuKZSH6VvOehxbjyLHXxDCA9KFRfm/fCW', 'Isaiah', 'Quinicot', 'manager@manager.com', 'manager', ''),
+(9, 'admin1', '$2b$10$E5CuM/bJ98P9l8m2lRHxRuz/BKjPslVlhZOA.Zo0Itk.71UiYbHDW', 'Marc Lloyd', 'Quisel', 'admin@admin.com', 'admin', ''),
+(10, 'keqing', '$2b$10$Ep8k0EjeYEB.puWy6PBOauYQfYTpBg/IMKSEI1t0euFvU3KISZ8um', 'Keqing', 'Waifu', 'email@email.com', 'client', ''),
+(11, 'employee1', '$2b$10$DfjhLlwxowa46KzUD5.DAebVS0bVHRz6O/LUXF2wdfkdndZE3xvU2', 'Papa', 'Cologne', 'papacol@gmail.com', 'employee', 'Photographer'),
+(12, 'employee2', '$2b$10$whPJN7eInkWYVw/y9f1H3OKygblWsHbibGiX1ia8QzWRY/KrCTq/a', 'Edit', 'Edit', 'editedit@gmail.com', 'employee', 'Editor'),
+(13, 'gordonram', '$2b$10$pNKSlg9D3Ao3EkVIMXqf5OKCpiAqwnh0zi9hTBFeOFr8JTOorKwW.', 'Gordon', 'Ramsay', 'gmail@gmail.com', 'employee', 'Editor');
 
 --
 -- Indexes for dumped tables
@@ -232,7 +240,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
