@@ -1,4 +1,3 @@
-import e from 'express';
 import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById } from '../models/eventModel.js'
 
 export const showAllEvents = (req,res) => {

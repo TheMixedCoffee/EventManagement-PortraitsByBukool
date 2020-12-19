@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <div class="field">
+  <div class="container">
+    <i class="far fa-calendar-alt"></i>
+    <div class="form-group">
       <label class="label">Username</label>
       <div class="control">
-        <input class="input" type="text" placeholder="Enter username" v-model="username"/>
+        <input class="form-control" type="text" placeholder="Enter username" v-model="username"/>
       </div>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <label class="label">Password</label>
       <div class="control">
-        <input class="input" type="password" placeholder="Enter password" v-model="password"/>
+        <input class="form-control" type="password" placeholder="Enter password" v-model="password"/>
       </div>
     </div>
-    <div class="control">
-      <button type="submit" class="button is-success" @click="loginUser">LOGIN</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" @click="loginUser">LOGIN</button>
     </div>
   </div>
 </template>

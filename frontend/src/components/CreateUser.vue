@@ -35,6 +35,13 @@
       </div>
     </div>
  
+    <div class="field">
+      <label class="label">Contact Number</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Enter contact number" v-model="contact"/>
+      </div>
+    </div>
+  
     <div class="control">
       <button type="submit" class="button is-success" @click="createUser">SIGNUP</button>
     </div>
@@ -54,6 +61,7 @@ export default {
       username: "",
       password: "",
       email: "",
+      contact: "",
     };
   },
   methods: {
@@ -66,6 +74,7 @@ export default {
           firstname: this.firstname,
           lastname: this.lastname,
           email: this.email,
+          contact: this.contact,
         });
         this.username = "";
         this.password = "";

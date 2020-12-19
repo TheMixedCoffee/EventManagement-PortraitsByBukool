@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import 'bootstrap'
 
 import App from './App.vue'
 import User from './components/UserList.vue'
@@ -11,6 +12,9 @@ import ClientEvents from './components/Client/ClientEvents.vue'
 import EmployeeEvents from './components/Employee/EmployeeEvents.vue'
 import ManagerEvents from './components/Manager/ManagerEvents.vue'
 import AdminServices from './components/Admin/AdminServices.vue'
+import ManagerEmployees from './components/Manager/ManagerEmployees.vue'
+import AdminContacts from './components/Admin/AdminContacts.vue'
+import AdminEmployees from './components/Admin/AdminEmployees.vue'
 
 Vue.use(VueRouter)
 
@@ -61,6 +65,21 @@ const routes = [
     name: 'AdminServices',
     path: '/admin/services',
     component: AdminServices
+  },
+  {
+    name: 'AdminContacts',
+    path: '/admin/contacts',
+    component: AdminContacts
+  },
+  {
+    name: 'AdminEmployees',
+    path: '/admin/employees',
+    component: AdminEmployees
+  },
+  {
+    name: 'ManagerEmployees',
+    path: '/manager/employees',
+    component: ManagerEmployees
   },
 ]
 
