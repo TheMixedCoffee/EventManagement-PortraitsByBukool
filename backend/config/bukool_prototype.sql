@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2020 at 05:34 PM
+-- Generation Time: Dec 20, 2020 at 11:28 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `assigned_event`
+--
+
+CREATE TABLE `assigned_event` (
+  `event_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `assigned_event`
+--
+
+INSERT INTO `assigned_event` (`event_id`, `employee_id`) VALUES
+(1, 11),
+(1, 12),
+(2, 11);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `event`
 --
 
@@ -37,6 +57,14 @@ CREATE TABLE `event` (
   `employee_id` int(11) NOT NULL,
   `event_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`) VALUES
+(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 1, '2020-12-16'),
+(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23');
 
 -- --------------------------------------------------------
 
@@ -65,7 +93,23 @@ CREATE TABLE `event_type` (
 --
 
 INSERT INTO `event_type` (`id`, `name`) VALUES
-(1, 'wedding');
+(1, 'wedding'),
+(2, 'debut'),
+(3, 'events'),
+(4, 'personal portfolio');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inbox`
+--
+
+CREATE TABLE `inbox` (
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -90,7 +134,7 @@ CREATE TABLE `message` (
 CREATE TABLE `service` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(1024) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `event_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -100,11 +144,18 @@ CREATE TABLE `service` (
 --
 
 INSERT INTO `service` (`id`, `name`, `description`, `price`, `event_type_id`) VALUES
-(1, 'Perfect Bliss', 'Photo\r\n– Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop ', '50000.00', 1),
+(1, 'Perfect Bliss', 'Photo  – Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop\r\nVideo\r\n– Prenup short film\r\n– Wedding coverage from dress-up to reception\r\n– Drone / Aerial Services\r\n– Same-Day-Edit\r\n– 3 professional cinematographers and 1 onsite editor', '50000.00', 1),
 (2, 'Grey', '– Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop crystal', '30000.00', 1),
 (3, 'White', '– Prenup session and prenup slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 30-page 10×10” premium fine art album (slim pages)\r\n– 2-3 professional photograph', '25000.00', 1),
 (4, 'Brown', '– No prenup session\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 20-page 10×10” premium fine art album (slim pages)\r\n– 2 professional photographers', '20000.00', 1),
-(5, 'Prenup Only', '– Up to 6 hours of photoshoot – Unlimited photos taken on the day – High resolution images professionally edited and supplied with USB for high-quality printing – Prenup slideshow – 2 professional photographers', '10000.00', 0);
+(5, 'Prenup Only', '– Up to 6 hours of photoshoot – Unlimited photos taken on the day – High resolution images professionally edited and supplied with USB for high-quality printing – Prenup slideshow – 2 professional photographers', '10000.00', 1),
+(6, 'Bliss', 'Photo\r\n– Pre-debut session and slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing – 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop crystal frame cover\r\n– One (1) 16×20” Wooden Claire™ photo frame\r\n– 3 professional photographers\r\nVideo\r\n– Pre-debut short film\r\n– Coverage from dress-up to reception\r\n– Drone / Aerial Services\r\n– Same-Day-Edit\r\n– Cinematic Highlights Final Output (3-5mins)\r\n– 3 professional cinematographers and 1 onsite editor', '40000.00', 2),
+(7, 'Glee', '– Pre-debut session and slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 40-page 10×10” premium fine art album (slim pages) with an 11×11″ desktop crystal fra', '25000.00', 2),
+(8, 'Happy', '– Pre-debut session and slideshow\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 20-page 10×10” premium fine art album (slim pages)\r\n– 2-3 professional photographers', '20000.00', 2),
+(9, 'Fun', '– No pre-debut session\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 20-page 10×10” premium fine art album (slim pages)\r\n– 2 professional photographers', '15000.00', 2),
+(10, 'Director', 'Photo\r\n– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 3 professional photographers\r\n\r\nVideo\r\n– Drone / Aerial Services\r\n– Same-Day-Edit\r\n– Cinematic Highlights Final Output (3-5mins)\r\n– 3 professional cinematographers and 1 onsite editor', '35000.00', 3),
+(11, 'Executive', '– Unlimited photos taken on the day\r\n– High resolution images professionally edited and supplied with USB for high-quality printing\r\n– 2 professional photographers', '20000.00', 3),
+(12, 'Photo Book Package', '– Up to 6 hours of photography session – Unlimited photos taken on the day – High resolution images professionally edited and supplied with USB for high-quality printing – 20-page 10×10” premium fine art album (slim pages) – 2 professional photographers', '15000.00', 4);
 
 -- --------------------------------------------------------
 
@@ -133,6 +184,7 @@ CREATE TABLE `user` (
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `contact` varchar(32) NOT NULL,
   `user_type` varchar(32) NOT NULL,
   `employee_type` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -141,15 +193,16 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `user_type`, `employee_type`) VALUES
-(3, 'lloyd', '$2b$10$MPea7kFvjRIsylm.rh0h8Ox8qzEyXdjGc/KLRigSPtHDJFP5gR1Fe', '', '', 'helloworldxzc@gmail.com', 'client', ''),
-(7, 'maquisel', '$2b$10$9nDaU7uL0xb5riKsZVMCeenJspX9f997HjuskixBzPQ/czIvYDnLC', 'Marc Lloyd', 'Quisel', 'email.email.com', 'client', ''),
-(8, 'manager1', '$2b$10$dBhOFDLmDU3EYKeFMmkFcuKZSH6VvOehxbjyLHXxDCA9KFRfm/fCW', 'Isaiah', 'Quinicot', 'manager@manager.com', 'manager', ''),
-(9, 'admin1', '$2b$10$E5CuM/bJ98P9l8m2lRHxRuz/BKjPslVlhZOA.Zo0Itk.71UiYbHDW', 'Marc Lloyd', 'Quisel', 'admin@admin.com', 'admin', ''),
-(10, 'keqing', '$2b$10$Ep8k0EjeYEB.puWy6PBOauYQfYTpBg/IMKSEI1t0euFvU3KISZ8um', 'Keqing', 'Waifu', 'email@email.com', 'client', ''),
-(11, 'employee1', '$2b$10$DfjhLlwxowa46KzUD5.DAebVS0bVHRz6O/LUXF2wdfkdndZE3xvU2', 'Papa', 'Cologne', 'papacol@gmail.com', 'employee', 'Photographer'),
-(12, 'employee2', '$2b$10$whPJN7eInkWYVw/y9f1H3OKygblWsHbibGiX1ia8QzWRY/KrCTq/a', 'Edit', 'Edit', 'editedit@gmail.com', 'employee', 'Editor'),
-(13, 'gordonram', '$2b$10$pNKSlg9D3Ao3EkVIMXqf5OKCpiAqwnh0zi9hTBFeOFr8JTOorKwW.', 'Gordon', 'Ramsay', 'gmail@gmail.com', 'employee', 'Editor');
+INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `contact`, `user_type`, `employee_type`) VALUES
+(3, 'lloyd', '$2b$10$MPea7kFvjRIsylm.rh0h8Ox8qzEyXdjGc/KLRigSPtHDJFP5gR1Fe', '', '', 'helloworldxzc@gmail.com', '', 'client', ''),
+(7, 'maquisel', '$2b$10$9nDaU7uL0xb5riKsZVMCeenJspX9f997HjuskixBzPQ/czIvYDnLC', 'Marc Lloyd', 'Quisel', 'email.email.com', '', 'client', ''),
+(8, 'manager1', '$2b$10$dBhOFDLmDU3EYKeFMmkFcuKZSH6VvOehxbjyLHXxDCA9KFRfm/fCW', 'Isaiah', 'Quinicot', 'manager@manager.com', '', 'manager', ''),
+(9, 'admin1', '$2b$10$E5CuM/bJ98P9l8m2lRHxRuz/BKjPslVlhZOA.Zo0Itk.71UiYbHDW', 'Marc Lloyd', 'Quisel', 'admin@admin.com', '', 'admin', ''),
+(10, 'keqing', '$2b$10$Ep8k0EjeYEB.puWy6PBOauYQfYTpBg/IMKSEI1t0euFvU3KISZ8um', 'Keqing', 'Waifu', 'email@email.com', '', 'client', ''),
+(16, 'saemployee', '$2b$10$A/2CaMe3rIMxj.WW6bNOQuS47PZqb/I.Mz0xX5wX2RU1iwy2PpmOu', 'Sample', 'Employee', 'sample@gmail.com', '09563325649', 'employee', 'Photographer'),
+(17, 'pacologne', '$2b$10$aFQLeCfUh.dBrt4m0qKfgOjaXsNzt1UYt5QbuOPJmVm85C6lI.dsu', 'Papa', 'Cologne', 'papacol@gmail.com', '+639458256588', 'employee', 'Videographer'),
+(19, 'bemansell', '$2b$10$fvu0rMD96yXKaVLLMhUFFeIcZLOPnpZHHB/aUqLZDGN0aNGuddwVu', 'Benito', 'Mansell', 'benito@gmail.com', '+6395462231', 'employee', 'Photographer'),
+(20, 'jaknapp', '$2b$10$EYhycRK0EJaaDT657sFwteNR1mdYJqfva./3o4E0FJL2Czd9bQfcy', 'Jadine', 'Knapp', 'jadine@gmail.com', '09542263587', 'employee', 'Videographer');
 
 --
 -- Indexes for dumped tables
@@ -210,13 +263,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `event_type`
 --
 ALTER TABLE `event_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -228,7 +281,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -240,7 +293,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
