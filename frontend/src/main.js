@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import 'bootstrap'
+import 'popper.js'
+import 'jquery'
 
 import App from './App.vue'
 import User from './components/UserList.vue'

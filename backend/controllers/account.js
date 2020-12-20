@@ -1,9 +1,7 @@
 import { getUsers, getUserById, insertUser, checkUser, getEmployees, getAssignEvents, deleteUserById, insertEmployee } from "../models/accountModel.js";
 
-import session from "express-session";
 import bcrypt from "bcrypt";
 import { saltRounds }  from '../app.js';
-import e from "express";
 
 export const showUsers = (req,res) => {
     getUsers((err, results) => {

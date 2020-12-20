@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1>Admin Page - Employees</h1>
     <div class="mb-4">
       <a class="btn btn-outline-dark mr-1" href="/admin/services">Services</a>
       <a class="btn btn-outline-dark mr-1" href="/admin/employees">Employees</a>
@@ -7,13 +8,13 @@
       <a class="btn btn-outline-dark mr-1" href="/admin/inbox">Inbox</a>
     </div>
     <a class="text-success" data-toggle="modal" data-target="#addEmployeeModal" @click="reset()">Add Employee <i class="fas fa-plus-circle fa-lg"></i></a>
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
       <div v-for="employee in employees" :key="employee.id" class="col mb-4">
         <a data-toggle="modal" data-target="#showEmployeeModal" @click="getAssignedEvents(employee.id)">
           <div class="card" style="max-width: 540px;">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <img src="" class="card-img" alt="...">
+                <img src="" class="card-img" alt="">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -167,7 +168,6 @@ export default {
     },
     async addEmployee() {
       try {
-        console.log("I CAME HERE")
         await axios.post("http://localhost:3000/admin/employees", {
           username: "",
           password: "password123",

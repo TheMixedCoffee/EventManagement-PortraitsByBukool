@@ -28,3 +28,25 @@ export const insertService = (data, result) => {
         }
     });
 }
+
+export const updateServiceById = (data, id, result) => {
+    db.query(`UPDATE service SET name = '${data.name}', description = '${data.description}', 
+        price = '${data.price}', event_type_id = '${data.event_type_id}' WHERE id = ${id}`, 
+        (err, results) => {
+            if (err) {
+                throw err;
+            } else {
+                result(null, results);
+            }
+        })
+}
+
+export const deleteServiceById = (id, result) => {
+    db.query("DELETE FROM service WHERE id = ?", [id], (err, results) => {
+        if (err) {
+            throw err;
+        } else {
+            result(null, results);
+        }
+    })
+}
