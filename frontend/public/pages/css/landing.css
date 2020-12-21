@@ -309,15 +309,35 @@ footer{
 .first-part{
     padding-top: 50px;
     padding-bottom: 10px;
+    padding-left: 80px;
+    padding-right: 50px;
     color: white;
 }
 
 .segment-one{
-    padding-right: 30px;
+    margin-right: 100px;
 }
 
-.first-part h2, .first-part p, .first-part a, .first-part label{
+.first-part h2, .first-part p, .first-part a, .first-part label .first-part input::placeholder{
     font-family: 'Montserrat', sans-serif;
+}
+
+.first-part label{
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.first-part input{
+    font-size: 12px;
+}
+
+.form-control{
+    height: 45px;
+}
+
+.first-part h1{
+    font-family: 'Old Standard TT', serif;
+    font-size: 40px;
 }
 
 .first-part ul{
@@ -330,12 +350,27 @@ footer{
 }
 
 .first-part h2{
+    text-transform: uppercase;
     font-size: 18px;
 }
 
+.first-part input{
+    border-radius: 0px;
+}
 
 .first-part button{
+    font-size: 15px;
     font-family: 'Spectral', serif;
+    text-transform: uppercase;
+    border-radius: 0px;
+    background-color: transparent;
+    border: 1px solid white;
+    width: 100%;
+}
+
+.first-part button:hover{
+    background-color: transparent;
+    border: 1px solid white;
 }
 
 .hr-footer{
@@ -346,11 +381,14 @@ footer{
 .copyright{
     padding-top: 5px;
     padding-bottom: 5px;
+    text-align: center;
+    opacity: 0.5;
 }
 
 .copyright p{
+    display: inline-block;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     color: white;
 }
 
