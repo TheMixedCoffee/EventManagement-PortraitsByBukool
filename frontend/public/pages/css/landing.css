@@ -1,0 +1,415 @@
+html body{
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    background-color: #F8F9F9;
+}
+
+.main{
+    padding-left: 80px;
+}
+
+.divider{
+    margin-right: 40px;
+    border-top: 2px solid black;
+    opacity: 0.34;
+}
+
+.navbar{
+    padding-bottom: 55px;
+}
+
+.nav-links{
+    margin-left: 80px;
+}
+
+.navFont{
+    font-family: 'Forum', cursive;
+    font-size: 30px;
+    line-height: 33px;
+}
+
+.activee{
+    width: 100%;
+    height: 0;
+    bottom: 2px;
+    left: 0;
+    background-color: black;
+}
+
+a.black-link{
+    color: black!important;
+    position: relative;
+}
+
+.letter-spacing{
+    letter-spacing: 0.05em!important;
+}
+
+a.black-link:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+a.black-link:hover:before, .active a:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.navSpace{
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+.pad{
+    padding-top: 30px;
+}
+
+.brand{
+    font-family: 'Poiret One', cursive;
+    font-size: 30px !important;
+    margin-right: 0px;
+}
+
+.first-row{
+    padding-top: 10px;
+}
+
+.second-row{
+    padding-top: 15px;
+}
+
+.search{
+    width: 235px;
+    height: 30px;
+    left: 892px;
+    top: 143px;
+}
+
+.search-input{
+    border: 1px solid #000000;
+    width: 235px;
+    height: 30px;
+    left: 892px;
+    top: 143px;
+    /* background: url(../img/search.png) no-repeat scroll 7px 7px;
+    padding-right:5px; */
+}
+
+.search i{
+    position: absolute;
+    /* padding-top: 6px; */
+    padding: 6px;
+    width: 70px;
+    /* text-align: left; */
+} 
+
+.alignRight{
+    float: right;
+    padding-right: 28px;
+}
+
+.socials{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.ext-social{
+    padding-right: 20px;
+    padding-left: 30px;
+}
+
+.first-section{
+    padding-bottom: 15px;
+}
+
+.second-first-section{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 30px;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row .column{
+    flex: 22.2%; /* Because of 2 columns 11x2 */
+    width: auto;
+    height: 100%;
+}
+
+.main-pic{
+    width: 821px!important;
+    height: 505px!important;
+}
+
+.left-side{
+    padding-right: 15px;
+}
+
+.right-side{
+    padding-left: 15px; 
+}
+
+.first-right{
+    width: 377px !important;
+    height: 252px !important;
+    padding-bottom: 15px;
+}
+
+.second-right{
+    width: 377px !important;
+    height: 252px !important;
+    padding-top: 15px;
+}
+
+.row .column img{
+    width: 100%;
+    height: 100%;
+}
+
+.row2{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row2 .col img{
+    width: 285px;
+    height: 165px;
+    opacity: 0.4;
+}
+
+.col{
+    text-align: center;
+    flex-grow: 0!important;
+    padding-left: 0px!important;
+    padding-right: 0px;
+}
+
+.col-right{
+    padding-right: 29.3px;
+}
+
+.thumbnail-color{
+    background-color: #C4C4C4;
+}
+
+.centerText{
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.thumbnail-link{
+    font-family: 'Averia Serif Libre', cursive;
+    color: white;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.centerText-adjust{
+    left: 50%!important;
+}
+
+.centerText, .thumbnail-link:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.second-section{
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.title h1{
+    font-family: 'Forum', cursive;
+    color: #484848;
+    font-size: 45px;
+    font-weight: 400;
+    margin-bottom: 0px!important;
+}
+
+.date h2{
+    font-family: 'Poiret One', cursive;
+    color: #484848;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 0px!important;
+}
+
+.content{
+    margin-top: 25px;
+}
+
+.content p{
+    font-family: 'Open Sans', sans-serif;
+    color: #484848;
+    font-size: 20px;
+    margin-right: 40px;
+
+}
+
+.article-img{
+    padding-top: 20px;
+}
+
+.article-img img{
+    width: 1228px;
+    height: 540px;
+}
+
+.recent-post{
+    padding-top: 10px;
+}
+
+.recent-post h2{
+    font-family: 'Sorts Mill Goudy', serif;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 71.9px;
+    color: black;
+    text-align: center;
+    margin-bottom: 0px!important;
+}
+
+.recents{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.carousel{
+    width: 788px;
+    height: 525px;
+    margin: auto;
+}
+
+.carousel-caption h5, .carousel-caption p{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-shadow: 3px 3px 5px black;
+}
+
+footer{
+    background-color: black;
+}
+
+.first-part{
+    padding-top: 50px;
+    padding-bottom: 10px;
+    padding-left: 80px;
+    padding-right: 50px;
+    color: white;
+}
+
+.segment-one{
+    margin-right: 100px;
+}
+
+.first-part h2, .first-part p, .first-part a, .first-part label .first-part input::placeholder{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.first-part label{
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.first-part input{
+    font-size: 12px;
+}
+
+.form-control{
+    height: 45px;
+}
+
+.first-part h1{
+    font-family: 'Old Standard TT', serif;
+    font-size: 40px;
+}
+
+.first-part ul{
+    padding-left: 0px;
+    list-style-type: none;
+}
+.first-part a{
+    color: white;
+    font-size: 15px;
+}
+
+.first-part h2{
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.first-part input{
+    border-radius: 0px;
+}
+
+.first-part button{
+    font-size: 15px;
+    font-family: 'Spectral', serif;
+    text-transform: uppercase;
+    border-radius: 0px;
+    background-color: transparent;
+    border: 1px solid white;
+    width: 100%;
+}
+
+.first-part button:hover{
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+.hr-footer{
+    border-top: solid 3px;
+    color: #FFFFFF, 30%;
+}
+
+.copyright{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.copyright p{
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    color: white;
+}
+
+
+/* .inputContainer i {
+    position: absolute;
+ }
+ .inputContainer {
+    width: 100%;
+    margin-bottom: 10px;
+ }
+ .icon {
+    padding: 15px;
+    color: rgb(49, 0, 128);
+    width: 70px;
+    text-align: left;
+ }
+ .Field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+ } */
