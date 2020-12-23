@@ -1,0 +1,53 @@
+.about-header {
+    margin-bottom: 40px;
+}
+
+.header-text {
+    flex-grow: 0!important;
+    padding-left: 0!important;
+    padding-right: 0px;
+    position: absolute;
+    top: 40%;
+    left: 18%;
+    color: #f8f9f9;
+}
+
+.about-us {
+    font-size: 3em;
+    padding-bottom: 40px;
+}
+
+.tagline {
+    padding-top: 0%!important;
+    font-size: 2em;
+}
+
+.about-title {
+    padding-bottom: 0%!important;
+    margin-bottom: 0%!important;
+}
+
+.row {
+    margin-bottom: 40px;
+}
+
+.about-content {
+    padding-right: 120px;
+}
+
+.nextline {
+    padding-top: 10px;
+}
+
+
+
+ /* font styles */
+.forum {
+    font-family: 'Forum', cursive;
+}
+.poiret {
+    font-family: 'Poiret One', cursive;
+}
+.opensans {
+    font-family: 'Open Sans', sans-serif;
+}

@@ -1,0 +1,173 @@
+<template>
+  <div class="container">
+    <div class="my-4">
+      <a class="btn btn-outline-dark mr-1" href="/manager/events">Events</a>
+      <a class="btn btn-outline-dark mr-1 active" href="/manager/suppliers">Suppliers</a>
+      <a class="btn btn-outline-dark mr-1" href="/manager/deliveries">Deliveries</a>
+      <a class="btn btn-outline-dark mr-1" href="/manager/employees">Employees</a>
+      <a class="btn btn-outline-dark mr-1" href="/manager/inbox">Inbox</a>
+    </div>
+    <h1>Manager Page - Suppliers</h1>
+    <a class="text-success" data-toggle="modal" data-target="#addSupplierModal" @click="reset()">Add Contact <i class="fas fa-plus-circle fa-lg"></i></a>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div v-for="supplier in suppliers" :key="supplier.id" class="col mb-3">
+           <div class="card h-100">
+                <h5 class="card-header">{{ supplier.company_name }}</h5>
+                <div class="card-body">
+                    <p class="card-text">Contact no: {{ supplier.contact_number }}</p>
+                </div>
+                <div class="card-footer">
+                    <a data-toggle="modal" data-target="#showSupplierModal" class="btn btn-primary text-white btn-sm" @click="getSupplierById(supplier.id)">Details</a>
+                    <a class="btn btn-primary btn-sm ml-1 text-white">History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="showSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ company_name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="card-text">{{ description }}</p>
+            <div class="card-text"><small class="text-muted">Contact Person: {{ contact_person }}</small></div>
+            <div class="card-text"><small class="text-muted">Contact number: {{ contact_number }}</small></div>
+            <div class="card-text"><small class="text-muted">Email Address: {{ email }}</small></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="addSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="company_name">Company Name: </label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="company_name" v-model="company_name" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="description">Description: </label>
+              <div class="col-sm-8">
+                <textarea type="text" class="form-control" rows="4" id="description" v-model="description" required></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="contact_person">Contact Person: </label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="contact_person" v-model="contact_person" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="contact_number">Contact Number: </label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="contact_number" v-model="contact_number" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="email">Email Address: </label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="email" v-model="email" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="addSupplier" data-dismiss="modal">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: 'ManagerEmployees',
+  data() {
+    return {
+      company_name: "",
+      contact_person: "",
+      description: "",
+      contact_number: "",
+      email: "",
+      suppliers: [],
+    };
+  },
+
+  created() {
+    this.getSuppliers();
+  },
+
+  methods: {
+    async getSuppliers() {
+      try {
+        const response = await axios.get("http://localhost:3000/manager/suppliers");
+        this.suppliers = response.data;
+        console.log(this.suppliers);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getSupplierById(id) {
+      try {
+        const response = await axios.get(`http://localhost:3000/manager/suppliers/${id}`)
+        this.company_name = response.data.company_name;
+        this.contact_person = response.data.contact_person;
+        this.description = response.data.description;
+        this.contact_number = response.data.contact_number;
+        this.email = response.data.email;
+        console.log(response.data);
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async addSupplier() {
+      try {
+        await axios.post("http://localhost:3000/manager/suppliers", {
+          company_name: this.company_name,
+          contact_person: this.contact_person,
+          description: this.description,
+          contact_number: this.contact_number,
+          email: this.email,
+        });
+        this.company_name = "";
+        this.contact_person = "";
+        this.description = "";
+        this.contact_number = "";
+        this.email = "";
+        this.getSuppliers();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    reset() {
+      this.company_name = "";
+      this.contact_person = "";
+      this.description = "";
+      this.contact_number = "";
+      this.email = "";
+    }
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>

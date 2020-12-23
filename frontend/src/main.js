@@ -5,24 +5,50 @@ import 'popper.js'
 import 'jquery'
 
 import App from './App.vue'
+// Main components
 import User from './components/UserList.vue'
 import CreateUser from './components/CreateUser.vue'
-import Services from './components/Services.vue'
-import AddService from './components/AddService.vue'
 import Login from './components/Login.vue'
+import Landing from './components/Landing.vue'
+import Packages from './components/Packages.vue'
+import About from './components/About.vue'
+// Client components
 import ClientEvents from './components/Client/ClientEvents.vue'
-import EmployeeEvents from './components/Employee/EmployeeEvents.vue'
-import ManagerEvents from './components/Manager/ManagerEvents.vue'
+// Admin components
 import AdminServices from './components/Admin/AdminServices.vue'
-import ManagerEmployees from './components/Manager/ManagerEmployees.vue'
 import AdminContacts from './components/Admin/AdminContacts.vue'
 import AdminEmployees from './components/Admin/AdminEmployees.vue'
+// Manager components
+import ManagerEvents from './components/Manager/ManagerEvents.vue'
+import ManagerEmployees from './components/Manager/ManagerEmployees.vue'
+import ManagerSuppliers from './components/Manager/ManagerSuppliers.vue'
+// Employee components
+import EmployeeEvents from './components/Employee/EmployeeEvents.vue'
+
+
+
 
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
 const routes = [
+  // main routes
+  {
+    name: 'Landing',
+    path: '/',
+    component: Landing
+  },
+  {
+    name: 'Packages',
+    path: '/packages',
+    component: Packages
+  },
+  {
+    name: 'About',
+    path: '/about',
+    component: About
+  },
   {
     name: 'User',
     path: '/users',
@@ -38,31 +64,13 @@ const routes = [
     path: '/login',
     component: Login
   },
-  {
-    name: 'Service',
-    path: '/services',
-    component: Services
-  },
-  {
-    name: 'AddService',
-    path: '/addservice',
-    component: AddService
-  },
+  // client routes
   {
     name: 'ClientEvents',
     path: '/client/events',
     component: ClientEvents
   },
-  {
-    name: 'EmployeeEvents',
-    path: '/employee/events',
-    component: EmployeeEvents
-  },
-  {
-    name: 'ManagerEvents',
-    path: '/manager/events',
-    component: ManagerEvents
-  },
+  // admin routes
   {
     name: 'AdminServices',
     path: '/admin/services',
@@ -78,10 +86,27 @@ const routes = [
     path: '/admin/employees',
     component: AdminEmployees
   },
+  // manager routes
   {
     name: 'ManagerEmployees',
     path: '/manager/employees',
     component: ManagerEmployees
+  },
+  {
+    name: 'ManagerSuppliers',
+    path: '/manager/suppliers',
+    component: ManagerSuppliers
+  },
+  {
+    name: 'ManagerEvents',
+    path: '/manager/events',
+    component: ManagerEvents
+  },
+  // employee routes
+  {
+    name: 'EmployeeEvents',
+    path: '/employee/events',
+    component: EmployeeEvents
   },
 ]
 

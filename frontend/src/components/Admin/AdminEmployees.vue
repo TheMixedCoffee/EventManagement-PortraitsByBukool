@@ -14,7 +14,7 @@
           <div class="card" style="max-width: 540px;">
             <div class="row no-gutters">
               <div class="col-md-4">
-                <img src="" class="card-img" alt="">
+                <img src="../../../public/pages/img/employee.png" class="card-img" alt="">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -39,9 +39,16 @@
             </button>
           </div>
           <div class="modal-body">
-            <p class="card-text">{{ employee_type }}</p>
-            <div class="card-text"><small class="text-muted">{{ contact }}</small></div>
-            <div class="card-text"><small class="text-muted">{{ email }}</small></div>
+            <div class="row">
+              <div class="col col-sm-3">
+                <img src="../../../public/pages/img/employee.png" class="card-img" alt="">
+              </div>
+              <div class="col col-sm-9">
+                <p class="card-text">{{ employee_type }}</p>
+                <div class="card-text"><small class="text-muted">{{ contact }}</small></div>
+                <div class="card-text"><small class="text-muted">{{ email }}</small></div>
+              </div>
+            </div>
             <p>Currently Assigned Event:</p>
             <ul class="list-group">
               <li v-for="event in employeecard" :key="event.event_id" class="list-group-item">{{ event.event_name }}</li>
@@ -50,7 +57,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" @click="deleteEmployee(id)" data-dismiss="modal">Delete</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary">Message</button>
           </div>
         </div>
       </div>
