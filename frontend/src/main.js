@@ -14,6 +14,7 @@ import Packages from './components/Packages.vue'
 import About from './components/About.vue'
 // Client components
 import ClientEvents from './components/Client/ClientEvents.vue'
+import ClientTransactions from './components/Client/ClientTransactions.vue'
 // Admin components
 import AdminServices from './components/Admin/AdminServices.vue'
 import AdminContacts from './components/Admin/AdminContacts.vue'
@@ -22,10 +23,9 @@ import AdminEmployees from './components/Admin/AdminEmployees.vue'
 import ManagerEvents from './components/Manager/ManagerEvents.vue'
 import ManagerEmployees from './components/Manager/ManagerEmployees.vue'
 import ManagerSuppliers from './components/Manager/ManagerSuppliers.vue'
+import ManagerDeliveries from './components/Manager/ManagerDeliveries.vue'
 // Employee components
 import EmployeeEvents from './components/Employee/EmployeeEvents.vue'
-
-
 
 
 Vue.use(VueRouter)
@@ -70,6 +70,11 @@ const routes = [
     path: '/client/events',
     component: ClientEvents
   },
+  {
+    name: 'ClientTransactions',
+    path: '/client/transactions',
+    component: ClientTransactions
+  },
   // admin routes
   {
     name: 'AdminServices',
@@ -101,6 +106,11 @@ const routes = [
     name: 'ManagerEvents',
     path: '/manager/events',
     component: ManagerEvents
+  },
+  {
+    name: 'ManagerDeliveries',
+    path: '/manager/deliveries',
+    component: ManagerDeliveries
   },
   // employee routes
   {
