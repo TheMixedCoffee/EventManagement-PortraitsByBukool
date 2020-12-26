@@ -2,9 +2,8 @@ import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById, 
 
 export const showAllEvents = (req,res) => {
     getAllEvents((err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
+        if (err) throw err;
+        else {
             res.json(results);
         }
     })

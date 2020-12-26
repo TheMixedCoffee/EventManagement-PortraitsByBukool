@@ -39,26 +39,36 @@
 
 				<!-- Page Content  -->
 			<div id="content" class="p-4 p-md-5 pt-5">
-        <div>
-          <h1>Events</h1>
-          <table>
-            <thead>
-              <th>Service id</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-            </thead>
-            <tbody>
-              <tr v-for="service in services" :key="service.id">
-                <td>{{ service.id }}</td>
-                <td>{{ service.name}}</td>
-                <td>{{ service.description }}</td>
-                <td>{{ service.price }}</td>
-              </tr>
-            </tbody>
-          </table>
+      <div>
+        <h1>Events</h1>
+        <br>
+        <div class="row">
+          <div class="col-sm-3">
+            <h3>Event List</h3>
+            <div>
+              <a class="list-group-item list-group-item-action" v-for="event in events" :key="event.id" @click="showEvent(event.id)">
+                {{event.event_name}}
+              </a>
+            </div>
+          </div>
+          <div class="col">
+            <h3>Event Details</h3>
+            <div>
+            Project Status: {{eventStatus}}
+            <br>
+            Current Task:
+            <br>
+            Team Manager:
+            </div> 
+          </div>
+        </div>
+        <div class="row">
+          
         </div>
       </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -69,11 +79,14 @@ export default {
   name: 'ManagerEvents',
   data() {
     return {
+      eventStatus: "",
+      events: [],
       services: [],
     };
   },
 
   created() {
+    this.getEvents();
     this.getServices();
   },
 
@@ -87,6 +100,25 @@ export default {
         console.log(err);
       }
     },
+    async getEvents() {
+      try {
+        const response = await axios.get("http://localhost:3000/event");
+        this.events = response.data;
+        console.log(this.events);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async showEvent(id){
+      try {
+        const response = await axios.get(`http://localhost:3000/event/${id}`)
+        console.log(response);
+        this.eventName = response.data.eventName;
+        this.eventStatus = response.data.status;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
 };
 </script>

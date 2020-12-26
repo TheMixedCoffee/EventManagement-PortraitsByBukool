@@ -37,7 +37,9 @@
           <div class="col-sm-3">
             <h3>Your Events </h3>
             <div>
-              <a class="list-group-item list-group-item-action"> </a>
+              <a class="list-group-item list-group-item-action" v-for="event in events" :key="event.id" @click="showEvent(event.id)">
+                {{event.event_name}}
+              </a>
             </div>
             <div class="mt-5 mx-auto">
               <a href="/client/reservation">
@@ -48,14 +50,13 @@
           <div class="col">
             <h3>Event Details</h3>
             <div>
-            Project Status:
+            Project Status: {{eventStatus}}
             <br>
             Current Task:
             <br>
             Team Manager:
             </div> 
           </div>
-        
         </div>
       </div>
     </div>
@@ -69,11 +70,14 @@ export default {
   name: 'ClientEvents',
   data() {
     return {
+      eventStatus: "",
+      events: [],
       services: [],
     };
   },
 
   created() {
+    this.getEvents();
     this.getServices();
   },
 
@@ -87,6 +91,25 @@ export default {
         console.log(err);
       }
     },
+    async getEvents() {
+      try {
+        const response = await axios.get("http://localhost:3000/event");
+        this.events = response.data;
+        console.log(this.events);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async showEvent(id){
+      try {
+        const response = await axios.get(`http://localhost:3000/event/${id}`)
+        console.log(response);
+        this.eventName = response.data.eventName;
+        this.eventStatus = response.data.status;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
 };
 </script>

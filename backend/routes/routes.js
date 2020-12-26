@@ -26,6 +26,10 @@ router.get('/event_types', showAllEventTypes);
 router.post('/create_event/', createEvent);
 // Get user by email
 router.get('/user_email', showUserByEmail);
+// Get all events
+router.get('/event', showAllEvents);
+//Get events by id
+router.get('/event/:id', showEventById);
 
 // Admin routes
 // Get all employees to Admin View
