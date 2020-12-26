@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2020 at 10:36 AM
+-- Generation Time: Dec 26, 2020 at 04:44 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -77,16 +77,18 @@ CREATE TABLE `event` (
   `contact_number` varchar(32) NOT NULL,
   `event_type_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `event_date` date NOT NULL
+  `event_date` date NOT NULL,
+  `status` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`) VALUES
-(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 1, '2020-12-16'),
-(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23');
+INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`, `status`) VALUES
+(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 1, '2020-12-16', 'ongoing'),
+(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'pending'),
+(5, 10, 'Sam and Diana\'s Wedding', 'A wedding for Sam and Diana', '09771413131', 1, -1, '2020-12-31', 'pending');
 
 -- --------------------------------------------------------
 
@@ -297,7 +299,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `event_type`
