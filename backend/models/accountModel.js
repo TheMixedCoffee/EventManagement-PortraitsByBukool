@@ -57,6 +57,16 @@ export const checkUser = (username, result) => {
     })
 }
 
+export const checkUserEmail = (email, result) => {
+    db.query(`SELECT * FROM user WHERE email = '${email}'`, (err, results) => {
+        if(err) {
+            throw err;
+        } else {
+            result(null, results[0]);
+        }
+    })
+}
+
 export const getEmployees = (result) => {
     db.query(`SELECT * FROM user WHERE user_type = 'employee'`, (err, results) => {
         if (err) {

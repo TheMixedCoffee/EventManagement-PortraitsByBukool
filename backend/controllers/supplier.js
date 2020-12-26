@@ -20,7 +20,7 @@ export const showSupplierById = (req,res) => {
     })
 }
 
-export const creatSupplier = (req,res) => {
+export const createSupplier = (req,res) => {
     insertSupplier(req.body, (err, results) => {
         if (err) {
             throw err;

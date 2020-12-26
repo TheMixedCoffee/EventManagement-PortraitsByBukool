@@ -1,4 +1,4 @@
-import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById } from '../models/eventModel.js'
+import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById, insertEvent } from '../models/eventModel.js'
 
 export const showAllEvents = (req,res) => {
     getAllEvents((err, results) => {
@@ -35,6 +35,16 @@ export const showEventById = (req,res) => {
         if (err) {
             res.send(err);
         } else {
+            res.json(results);
+        }
+    })
+}
+
+export const createEvent = (req, res) => {
+    const data = req.body;
+    insertEvent(data, (err, results) => {
+        if (err) throw err;
+        else {
             res.json(results);
         }
     })

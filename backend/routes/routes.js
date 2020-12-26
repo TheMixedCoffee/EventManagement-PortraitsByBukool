@@ -1,9 +1,11 @@
 import express from "express";
 
-import { showUsers, showUserById, createUser, authUser, showEmployees, showAssignedEvents, deleteUser, createEmployee } from "../controllers/account.js";
+import { showUsers, showUserById, createUser, authUser, showEmployees, showAssignedEvents, deleteUser, createEmployee, showUserByEmail } from "../controllers/account.js";
 import { showServices, showServiceById, createService, deleteService, updateService } from "../controllers/service.js"
-import { creatSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
+import { createSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
 import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
+import { showAllEventTypes, showEventTypeById } from "../controllers/event_type.js"
+import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent} from "../controllers/event.js"
 
 // Initialize Router
 const router = express.Router();
@@ -18,6 +20,12 @@ router.post('/register', createUser);
 router.post('/login', authUser);
 // Get all services
 router.get('/services', showServices);
+// Get all event types
+router.get('/event_types', showAllEventTypes);
+// Create an event
+router.post('/create_event/', createEvent);
+// Get user by email
+router.get('/user_email', showUserByEmail);
 
 // Admin routes
 // Get all employees to Admin View
@@ -59,7 +67,7 @@ router.get('/manager/suppliers', showSuppliers);
 // Get Single Supplier
 router.get('/manager/suppliers/:id', showSupplierById);
 // Create New Supplier
-router.post('/manager/suppliers', creatSupplier);
+router.post('/manager/suppliers', createSupplier);
 
 //Export default router
 export default router;

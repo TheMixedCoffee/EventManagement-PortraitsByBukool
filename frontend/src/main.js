@@ -15,6 +15,7 @@ import About from './components/About.vue'
 // Client components
 import ClientEvents from './components/Client/ClientEvents.vue'
 import ClientTransactions from './components/Client/ClientTransactions.vue'
+import ClientReservation from './components/Client/ClientReservation.vue'
 // Admin components
 import AdminServices from './components/Admin/AdminServices.vue'
 import AdminContacts from './components/Admin/AdminContacts.vue'
@@ -74,6 +75,11 @@ const routes = [
     name: 'ClientTransactions',
     path: '/client/transactions',
     component: ClientTransactions
+  },
+  {
+    name: 'ClientReservation',
+    path: '/client/reservation',
+    component: ClientReservation
   },
   // admin routes
   {

@@ -36,3 +36,12 @@ export const getEventById = (id, result) => {
         }
     })
 }
+
+export const insertEvent = (data, result) => {
+    db.query("INSERT INTO event SET ?", [data], (err, results)=> {
+        if (err) throw err;
+        else {
+            result(null, results);
+        }
+    });
+}

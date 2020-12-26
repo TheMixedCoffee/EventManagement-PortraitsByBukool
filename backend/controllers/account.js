@@ -1,4 +1,4 @@
-import { getUsers, getUserById, insertUser, checkUser, getEmployees, getAssignEvents, deleteUserById, insertEmployee } from "../models/accountModel.js";
+import { getUsers, getUserById, insertUser, checkUser, checkUserEmail, getEmployees, getAssignEvents, deleteUserById, insertEmployee } from "../models/accountModel.js";
 
 import bcrypt from "bcrypt";
 import { saltRounds }  from '../app.js';
@@ -91,6 +91,15 @@ export const deleteUser = (req,res) => {
         if (err) {
             res.send(err);
         } else {
+            res.json(results);
+        }
+    })
+}
+
+export const showUserByEmail = (req,res) =>{
+    checkUserEmail(req.body.email, (err, results)=>{
+        if (err) throw err;
+        else{
             res.json(results);
         }
     })

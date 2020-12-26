@@ -33,22 +33,30 @@
       <div>
         <h1>Events</h1>
         <br>
-        <table>
-          <thead>
-            <th>Service id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-          </thead>
-          <tbody>
-            <tr v-for="service in services" :key="service.id">
-              <td>{{ service.id }}</td>
-              <td>{{ service.name}}</td>
-              <td>{{ service.description }}</td>
-              <td>{{ service.price }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <div class="col-sm-3">
+            <h3>Your Events </h3>
+            <div>
+              <a class="list-group-item list-group-item-action"> </a>
+            </div>
+            <div class="mt-5 mx-auto">
+              <a href="/client/reservation">
+                <button class="btn btn-success">Reserve an Event</button>
+              </a>
+            </div> 
+          </div>
+          <div class="col">
+            <h3>Event Details</h3>
+            <div>
+            Project Status:
+            <br>
+            Current Task:
+            <br>
+            Team Manager:
+            </div> 
+          </div>
+        
+        </div>
       </div>
     </div>
   </div>
