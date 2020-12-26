@@ -30,3 +30,6 @@ Admin Side   - Can see, add, update, and remove services
              - Can see, add, update, and remove employees
              - Can see, add, update, and remove contacts
 Thank you and God bless.
+
+Link to the demo:
+https://drive.google.com/drive/folders/1ig5aJbvRb4Y_wsPvb_Ukeit41wxtEWMB?usp=sharing
