@@ -3,6 +3,7 @@ import express from "express";
 import { showUsers, showUserById, createUser, authUser, showEmployees, showAssignedEvents, deleteUser, createEmployee } from "../controllers/account.js";
 import { showServices, showServiceById, createService, deleteService, updateService } from "../controllers/service.js"
 import { creatSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
+import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
 
 // Initialize Router
 const router = express.Router();
@@ -35,6 +36,16 @@ router.post('/admin/services', createService);
 router.put('/admin/services/:id', updateService);
 // Delete a Service
 router.delete('/admin/services/:id', deleteService);
+//Get all contacts
+router.get('/admin/contact', showContacts);
+//Search for a specific contact
+router.get('/admin/contact/:id', showContactById);
+//Create contact
+router.post('/admin/contact', createContact);
+//Update a contact
+router.put('/admin/contact/:id', updateContact);
+//Delete Contact
+router.delete('/admin/contact/:id', deleteContact);
 
 // Manager routes
 // Get all employees to Manager View
