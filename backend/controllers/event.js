@@ -1,4 +1,4 @@
-import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById, insertEvent } from '../models/eventModel.js'
+import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById, getOngoingEvent, getPendingEvent, getCompletedEvent, updateEventById, insertEvent } from '../models/eventModel.js'
 
 export const showAllEvents = (req,res) => {
     getAllEvents((err, results) => {
@@ -39,11 +39,58 @@ export const showEventById = (req,res) => {
     })
 }
 
+export const showAllOngoingEvents = (req,res)=>{
+    getOngoingEvent((err, results)=>{
+        if(err) throw err;
+        else{
+            res.json(results);
+        }
+    })
+}
+
+export const showAllPendingEvents = (req,res)=>{
+    getPendingEvent((err, results)=>{
+        if (err) throw err;
+        else{
+            res.json(results);
+        }
+    })
+}
+
+export const showAllCompletedEvents = (req,res)=>{
+    getCompletedEvent((err, results)=>{
+        if (err) throw err;
+        else{
+            res.json(results);
+        }
+    })
+}
+
+export const showCompletedEventsByAccount = (req,res)=>{
+    getCompletedEventByAccount(req.params.id, (err, results)=>{
+        if (err) throw err;
+        else{
+            res.json(results);
+        }
+    })
+}
+
 export const createEvent = (req, res) => {
     const data = req.body;
     insertEvent(data, (err, results) => {
         if (err) throw err;
         else {
+            res.json(results);
+        }
+    })
+}
+
+export const updateEvent = (req,res)=>{
+    const data = req.body;
+    const id = req.params.id;
+    updateEventById(data, id, (err, results)=>{
+        if (err) throw err;
+        else{
             res.json(results);
         }
     })

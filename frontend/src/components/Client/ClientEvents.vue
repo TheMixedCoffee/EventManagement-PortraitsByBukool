@@ -10,10 +10,10 @@
       <div class="mb-5">
       <ul class="list-unstyled components mb-5">
         <li class="active">
-          <a href="/client/events"><span class="fa fa-calendar mr-3"></span> Events</a>
+          <a @click="redirect('ClientEvents')"><span class="fa fa-calendar mr-3"></span> Events</a>
         </li>
         <li>
-          <a href="/client/transactions"><span class="fas fa-file-invoice mr-3"></span> Transactions</a>
+          <a @click="redirect('ClientTransactions')"><span class="fas fa-file-invoice mr-3"></span> Transactions</a>
         </li>
       </ul>
       </div>
@@ -35,7 +35,7 @@
         <br>
         <div class="row">
           <div class="col-sm-3">
-            <h3>Your Events {{ account_id }}</h3>
+            <h3>Your Events</h3>
             <div>
               <a class="list-group-item list-group-item-action" v-for="event in events" :key="event.id" @click="showEvent(event.id)">
                 {{event.event_name}}
@@ -56,6 +56,9 @@
             <br>
             Team Manager:
             </div> 
+          </div>
+          <div class="col">
+            <v-calendar ref="calendar" is-expanded></v-calendar>
           </div>
         </div>
       </div>
@@ -108,12 +111,21 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/event/${id}`)
         console.log(response);
-        this.eventName = response.data.eventName;
+        this.eventName = response.data.event_name;
         this.eventStatus = response.data.status;
+        const calendar = this.$refs.calendar;
+        await calendar.move(response.data.event_date);
       } catch (err) {
         console.log(err);
       }
     },
+    async redirect(path){
+      try{
+        this.$router.push({name: path, params: {id: this.account_id}});
+      }catch (err){
+        console.log(err);
+      }
+    }
   },
 };
 </script>

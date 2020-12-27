@@ -67,7 +67,7 @@ export default {
         } else if (this.user.user_type == "manager") {
             this.$router.push("/manager/events");
         } else if (this.user.user_type == 'employee') {
-            this.$router.push("/employee/events");
+            this.$router.push({name: "EmployeeEvents", params: {id: this.account_id}});
         } else if (this.user.user_type == 'client') {
             this.$router.push({name: "ClientEvents", params: {id: this.account_id}});
         }

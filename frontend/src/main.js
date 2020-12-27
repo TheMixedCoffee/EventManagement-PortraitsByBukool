@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VCalendar from 'v-calendar'
 import 'bootstrap'
 import 'popper.js'
 import 'jquery'
@@ -30,6 +31,7 @@ import EmployeeEvents from './components/Employee/EmployeeEvents.vue'
 
 
 Vue.use(VueRouter)
+Vue.use(VCalendar)
 
 Vue.config.productionTip = false
 

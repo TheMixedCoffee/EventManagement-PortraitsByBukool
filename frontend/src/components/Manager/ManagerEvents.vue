@@ -46,8 +46,8 @@
           <div class="col-sm-3">
             <h3>Event List</h3>
             <div>
-              <a class="list-group-item list-group-item-action" v-for="event in events" :key="event.id" @click="showEvent(event.id)">
-                {{event.event_name}}
+              <a class="list-group-item list-group-item-action" v-for="ongoing in ongoingEvents" :key="ongoing.id" @click="showEvent(ongoing.id)">
+                {{ongoing.event_name}}
               </a>
             </div>
           </div>
@@ -59,11 +59,27 @@
             Current Task:
             <br>
             Team Manager:
+            </div>
+            <div v-if="eventStatus == 'pending'">
+              <a class="text-success" @click="acceptEvent(eventId)">Reserve Event<i class="fas fa-plus-circle fa-lg"></i></a>
             </div> 
+            <div v-else-if="eventStatus == 'ongoing'">
+              <a class="text-success" @click="doneEvent(eventId)">Mark as Completed<i class="fas fa-plus-circle fa-lg"></i></a>
+            </div> 
+          </div>
+          <div class="col">
+            <v-calendar ref="calendar" is-expanded></v-calendar>
           </div>
         </div>
         <div class="row">
-          
+          <div class="col-sm-5">
+            <h3>Pending List</h3>
+            <div>
+              <a class="list-group-item list-group-item-action"  v-for="pending in pendingEvents" :key="pending.id" @click="showEvent(pending.id)">
+                {{pending.event_name}}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -79,15 +95,20 @@ export default {
   name: 'ManagerEvents',
   data() {
     return {
+      eventId: -1,
+      eventName: "",
+      eventDetails: "",
       eventStatus: "",
-      events: [],
+      ongoingEvents: [],
+      pendingEvents: [],
       services: [],
     };
   },
 
   created() {
-    this.getEvents();
+    this.getOngoingEvents();
     this.getServices();
+    this.getPendingEvents();
   },
 
   methods: {
@@ -100,11 +121,22 @@ export default {
         console.log(err);
       }
     },
-    async getEvents() {
+    async getOngoingEvents() {
       try {
-        const response = await axios.get("http://localhost:3000/event");
-        this.events = response.data;
-        console.log(this.events);
+        const response = await axios.get("http://localhost:3000/event_ongoing");
+        console.log("ONGOING");
+        this.ongoingEvents = response.data;
+        console.log(this.ongoingEvents);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getPendingEvents(){
+      try{
+        const response = await axios.get("http://localhost:3000/event_pending");
+        console.log("PENDING");
+        this.pendingEvents = response.data;
+        console.log(this.pendingEvents);
       } catch (err) {
         console.log(err);
       }
@@ -113,9 +145,39 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/event/${id}`)
         console.log(response);
-        this.eventName = response.data.eventName;
+        this.eventId = response.data.id
+        this.eventName = response.data.event_name;
+        this.eventDetails = response.data.event_details;
         this.eventStatus = response.data.status;
+        const calendar = this.$refs.calendar;
+        await calendar.move(response.data.event_date);
       } catch (err) {
+        console.log(err);
+      }
+    },
+    async acceptEvent(id){
+      try{
+        await axios.put(`http://localhost:3000/event_update/${id}`, {
+          event_name: this.eventName,
+          event_details: this.eventDetails,
+          status: "ongoing",
+        });
+        this.getOngoingEvents();
+        this.getPendingEvents();
+      }catch (err){
+        console.log(err);
+      }
+    },
+    async doneEvent(id){
+      try{
+        await axios.put(`http://localhost:3000/event_update/${id}`, {
+          event_name: this.eventName,
+          event_details: this.eventDetails,
+          status: "completed",
+        });
+        this.getOngoingEvents();
+        this.getPendingEvents();
+      }catch (err){
         console.log(err);
       }
     }

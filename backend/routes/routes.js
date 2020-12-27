@@ -5,7 +5,7 @@ import { showServices, showServiceById, createService, deleteService, updateServ
 import { createSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
 import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
 import { showAllEventTypes, showEventTypeById } from "../controllers/event_type.js"
-import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent} from "../controllers/event.js"
+import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent, showAllOngoingEvents, updateEvent, showAllCompletedEvents, showAllPendingEvents, showCompletedEventsByAccount,} from "../controllers/event.js"
 
 // Initialize Router
 const router = express.Router();
@@ -28,12 +28,20 @@ router.post('/create_event/', createEvent);
 router.get('/user_email', showUserByEmail);
 // Get all events
 router.get('/event', showAllEvents);
+//Get all ongoing events
+router.get('/event_ongoing', showAllOngoingEvents);
+//Get all pending events
+router.get('/event_pending', showAllPendingEvents);
 //Get events by id
 router.get('/event/:id', showEventById);
 //Get events by user id
 router.get('/event_user/:id', showEventByAccount);
 //Get user by name
 router.get('/get_account_id/:username', showUserByName);
+//Get completed Events
+router.get('/get_completed', showAllCompletedEvents);
+//Get completed Events by Account
+router.get('/get_completed/:id', showCompletedEventsByAccount);
 
 
 // Admin routes
@@ -77,6 +85,12 @@ router.get('/manager/suppliers', showSuppliers);
 router.get('/manager/suppliers/:id', showSupplierById);
 // Create New Supplier
 router.post('/manager/suppliers', createSupplier);
+//Update an Event
+router.put('/event_update/:id', updateEvent);
+
+//Employee routes
+//Get event based on employee id
+router.get('/employee/events/:id', showEventByEmployee);
 
 //Export default router
 export default router;
