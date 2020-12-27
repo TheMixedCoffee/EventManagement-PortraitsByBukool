@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2020 at 04:44 PM
+-- Generation Time: Dec 27, 2020 at 10:33 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -61,7 +61,8 @@ CREATE TABLE `contact` (
 
 INSERT INTO `contact` (`id`, `contact_name`, `contact_number`, `contact_desc`) VALUES
 (1, 'PLDT', '(02) 888 8171', 'Internet Service Provider'),
-(2, 'VECO', '230 8326', 'Visayan Electric Company');
+(2, 'VECO', '230 8326', 'Visayan Electric Company'),
+(4, 'Test', '123213213', 'testttt');
 
 -- --------------------------------------------------------
 
@@ -86,9 +87,11 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`, `status`) VALUES
-(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 1, '2020-12-16', 'ongoing'),
-(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'pending'),
-(5, 10, 'Sam and Diana\'s Wedding', 'A wedding for Sam and Diana', '09771413131', 1, -1, '2020-12-31', 'pending');
+(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 27, '2020-12-16', 'ongoing'),
+(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'ongoing'),
+(5, 10, 'Sam and Diana\'s Wedding', 'A wedding for Sam and Diana', '09771413131', 1, -1, '2020-12-31', 'pending'),
+(6, 10, 'Mona\'s Debut', 'A debut for Mona', '09771413131', 2, -1, '2021-01-22', 'pending'),
+(7, 10, 'Klee\'s Birthday Party', 'Very nice', '09441321', 3, -1, '2021-02-24', 'pending');
 
 -- --------------------------------------------------------
 
@@ -198,6 +201,21 @@ CREATE TABLE `supplier` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -226,7 +244,9 @@ INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `emai
 (16, 'saemployee', '$2b$10$A/2CaMe3rIMxj.WW6bNOQuS47PZqb/I.Mz0xX5wX2RU1iwy2PpmOu', 'Sample', 'Employee', 'sample@gmail.com', '09563325649', 'employee', 'Photographer'),
 (17, 'pacologne', '$2b$10$aFQLeCfUh.dBrt4m0qKfgOjaXsNzt1UYt5QbuOPJmVm85C6lI.dsu', 'Papa', 'Cologne', 'papacol@gmail.com', '+639458256588', 'employee', 'Videographer'),
 (19, 'bemansell', '$2b$10$fvu0rMD96yXKaVLLMhUFFeIcZLOPnpZHHB/aUqLZDGN0aNGuddwVu', 'Benito', 'Mansell', 'benito@gmail.com', '+6395462231', 'employee', 'Photographer'),
-(20, 'jaknapp', '$2b$10$EYhycRK0EJaaDT657sFwteNR1mdYJqfva./3o4E0FJL2Czd9bQfcy', 'Jadine', 'Knapp', 'jadine@gmail.com', '09542263587', 'employee', 'Videographer');
+(20, 'jaknapp', '$2b$10$EYhycRK0EJaaDT657sFwteNR1mdYJqfva./3o4E0FJL2Czd9bQfcy', 'Jadine', 'Knapp', 'jadine@gmail.com', '09542263587', 'employee', 'Videographer'),
+(21, 'jodoe', '$2b$10$22YWum6YmK56tTuRDf767.zkC8pfGKXCLkDuQlkuXjnW1MfJ5T7ai', 'John', 'Doe', 'johndoe@gmail.com', '1234123412', 'employee', 'Editor'),
+(22, 'jadoe', '$2b$10$h5QjJhYznP1KGaO3pV7lseE8w0khCp267PquiiI9dmY.b4W8Uj32i', 'Jane', 'Doe', 'janedoe@gmail.com', '3213124324234', 'employee', 'Photographer');
 
 --
 -- Indexes for dumped tables
@@ -280,6 +300,14 @@ ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employee_id` (`employee_id`),
+  ADD KEY `event_id` (`event_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -293,13 +321,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `event_type`
@@ -326,10 +354,16 @@ ALTER TABLE `supplier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -355,6 +389,13 @@ ALTER TABLE `event_services`
 ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
