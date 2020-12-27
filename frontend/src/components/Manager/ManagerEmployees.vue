@@ -42,8 +42,8 @@
         <div class="container">
           <h1>Employees</h1>
           <a class="text-success" data-toggle="modal" data-target="#addEmployeeModal" @click="reset()">Add Employee <i class="fas fa-plus-circle fa-lg"></i></a>
-          <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div v-for="employee in employees" :key="employee.id" class="col mb-4">
+          <div class="row row-cols-1 row-cols-md-3 g-4" v-for="i in Math.ceil(employees.length/4)" :key="i">
+            <div v-for="employee in employees.slice((i-1)*4, i*4)" :key="employee.id" class="col mb-4">
               <a data-toggle="modal" data-target="#showEmployeeModal" @click="getAssignedEvents(employee.id)">
                 <div class="card" style="max-width: 540px;">
                   <div class="row no-gutters">
