@@ -35,7 +35,7 @@
         <br>
         <div class="row">
           <div class="col-sm-3">
-            <h3>Your Events </h3>
+            <h3>Your Events {{ account_id }}</h3>
             <div>
               <a class="list-group-item list-group-item-action" v-for="event in events" :key="event.id" @click="showEvent(event.id)">
                 {{event.event_name}}
@@ -71,12 +71,15 @@ export default {
   data() {
     return {
       eventStatus: "",
+      account_id: -1,
       events: [],
       services: [],
     };
   },
 
   created() {
+    this.account_id = this.$route.params.id;
+    console.log("The account id is: " + this.account_id);
     this.getEvents();
     this.getServices();
   },
@@ -93,8 +96,9 @@ export default {
     },
     async getEvents() {
       try {
-        const response = await axios.get("http://localhost:3000/event");
+        const response = await axios.get(`http://localhost:3000/event_user/${this.account_id}`)
         this.events = response.data;
+        console.log("TEST");
         console.log(this.events);
       } catch (err) {
         console.log(err);
@@ -109,7 +113,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    }
+    },
   },
 };
 </script>

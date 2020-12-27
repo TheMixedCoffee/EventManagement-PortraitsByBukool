@@ -10,7 +10,7 @@ export const showAllEvents = (req,res) => {
 }
 
 export const showEventByAccount = (req,res) => {
-    getEventByAccountId(req.body.id, (err, results) => {
+    getEventByAccountId(req.params.id, (err, results) => {
         if (err) {
             res.send(err);
         } else {

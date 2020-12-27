@@ -31,6 +31,7 @@ export default {
       user: [],
       username: "",
       password: "",
+      account_id: "",
     };
   },
   methods: {
@@ -40,8 +41,10 @@ export default {
         const response = await axios.post("http://localhost:3000/login", {
           username: this.username,
           password: this.password,
+          account_id: this.id,
         });
         this.user = response.data;
+        this.account_id = this.user.id;
         this.username = "";
         this.password = "";
         if (this.user.user_type == 'admin') {
@@ -51,7 +54,7 @@ export default {
         } else if (this.user.user_type == 'employee') {
             this.$router.push("/employee/events");
         } else if (this.user.user_type == 'client') {
-            this.$router.push("/client/events");
+            this.$router.push({name: "ClientEvents", params: {id: this.account_id}});
         }
       } catch (err) {
         console.log(err);

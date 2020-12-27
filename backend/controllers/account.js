@@ -104,3 +104,12 @@ export const showUserByEmail = (req,res) =>{
         }
     })
 }
+
+export const showUserByName = (req,res)=>{
+    checkUser(req.body.username, (err,results)=>{
+        if (err) throw err;
+        else{
+            res.json(results);
+        }
+    })
+}

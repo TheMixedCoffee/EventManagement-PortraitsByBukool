@@ -1,6 +1,6 @@
 import express from "express";
 
-import { showUsers, showUserById, createUser, authUser, showEmployees, showAssignedEvents, deleteUser, createEmployee, showUserByEmail } from "../controllers/account.js";
+import { showUsers, showUserById, createUser, authUser, showUserByName, showEmployees, showAssignedEvents, deleteUser, createEmployee, showUserByEmail } from "../controllers/account.js";
 import { showServices, showServiceById, createService, deleteService, updateService } from "../controllers/service.js"
 import { createSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
 import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
@@ -30,6 +30,11 @@ router.get('/user_email', showUserByEmail);
 router.get('/event', showAllEvents);
 //Get events by id
 router.get('/event/:id', showEventById);
+//Get events by user id
+router.get('/event_user/:id', showEventByAccount);
+//Get user by name
+router.get('/get_account_id/:username', showUserByName);
+
 
 // Admin routes
 // Get all employees to Admin View

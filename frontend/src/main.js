@@ -68,7 +68,7 @@ const routes = [
   // client routes
   {
     name: 'ClientEvents',
-    path: '/client/events',
+    path: '/client/events/:id',
     component: ClientEvents
   },
   {
