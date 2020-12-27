@@ -1,49 +1,54 @@
 <template>
-  <div>
-    <div class="field">
-      <label class="label">First Name</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter First Name" v-model="firstname"/>
+  <div class="container col-sm-5 border mt-4 p-5">
+    <div class="text-center">
+      <img src="../../public/pages/img/sunlogo(original).png" alt="" class="w-25">
+    </div>
+    <h1 class="ramaraja text-dark text-center">Create an Account</h1>
+    <br>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-4">First Name</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" placeholder="Enter First Name" v-model="firstname"/>
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">Last Name</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter Last Name" v-model="lastname"/>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-4">Last Name</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" placeholder="Enter Last Name" v-model="lastname"/>
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">Username</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter username" v-model="username"/>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-4">Username</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" placeholder="Enter username" v-model="username"/>
       </div>
     </div>
  
-    <div class="field">
-      <label class="label">Password</label>
-      <div class="control">
-        <input class="input" type="password" placeholder="Enter password" v-model="password"/>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-4">Password</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="password" placeholder="Enter password" v-model="password"/>
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">Email Address</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter email address" v-model="email"/>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-4">Email Address</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" placeholder="Enter email address" v-model="email"/>
       </div>
     </div>
  
-    <div class="field">
-      <label class="label">Contact Number</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="Enter contact number" v-model="contact"/>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-4">Contact Number</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" placeholder="Enter contact number" v-model="contact"/>
       </div>
     </div>
   
-    <div class="control">
-      <button type="submit" class="button is-success" @click="createUser">SIGNUP</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" @click="createUser">SIGNUP</button>
     </div>
   </div>
 </template>
