@@ -32,7 +32,7 @@ export const insertContact = (data, result) => {
 }
 
 export const updateContactById = (data, id, result) => {
-    db.query(`UPDATE contact SET name = '${data.contact_name}', description = '${data.contact_desc}', 
+    db.query(`UPDATE contact SET contact_name = '${data.contact_name}', contact_description = '${data.contact_desc}', 
         contact_number = '${data.contact_number}' WHERE id = ${id}`, 
         (err, results) => {
             if (err) {

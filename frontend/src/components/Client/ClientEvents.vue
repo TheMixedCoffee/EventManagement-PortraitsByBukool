@@ -52,13 +52,13 @@
             <div>
             Project Status: {{eventStatus}}
             <br>
-            Current Task:
+            Current Task: {{currentTask}}
             <br>
-            Team Manager:
+            Team Manager: {{managerName}}
             </div> 
           </div>
           <div class="col">
-            <v-calendar ref="calendar" is-expanded></v-calendar>
+            <v-calendar ref="calendar" :attributes="attributes" is-expanded></v-calendar>
           </div>
         </div>
       </div>
@@ -73,7 +73,9 @@ export default {
   name: 'ClientEvents',
   data() {
     return {
+      currentTask: "",
       eventStatus: "",
+      managerName: "",
       account_id: -1,
       events: [],
       services: [],
@@ -115,6 +117,8 @@ export default {
         this.eventStatus = response.data.status;
         const calendar = this.$refs.calendar;
         await calendar.move(response.data.event_date);
+        this.currentTask = "Editing Photo";
+        this.managerName = "Isaiah Quinicot";
       } catch (err) {
         console.log(err);
       }
@@ -127,6 +131,61 @@ export default {
       }
     }
   },
+    computed:{
+    attributes(){
+      return[
+        {
+          highlight: {
+            color: 'blue',
+            start: {fillMode: 'outline'},
+            base: {fillMode: 'light'},
+            end: {fillMode: 'outline'},
+          },
+          dates: {start: new Date(2020, 11, 29), end: new Date(2020, 11, 31)},
+          popover: {
+            label: "Photoshoot at event location",
+            visibility: 'click'
+          }
+        },
+        {
+          highlight: {
+            start: {fillMode: 'outline', color: 'red'},
+            base: {fillMode: 'light', color: 'red'},
+            end: {fillMode: 'outline', color: 'red'},
+          },
+          dates: {start: new Date(2021, 0, 1), end: new Date(2021, 0, 3)},
+          popover: {
+            label: "Photo editing",
+            visibility: 'click'
+          }
+        },
+        {
+          highlight: {
+            start: {fillMode: 'outline', color: 'green'},
+            base: {fillMode: 'light', color: 'green'},
+            end: {fillMode: 'outline', color: 'green'},
+          },
+          dates: {start: new Date(2021, 0, 4), end: new Date(2021, 0, 6)},
+          popover: {
+            label: "Creation of physical album",
+            visibility: 'click'
+          }
+        },
+                {
+          highlight: {
+            start: {fillMode: 'outline', color: 'purple'},
+            base: {fillMode: 'light', color: 'purple'},
+            end: {fillMode: 'outline', color: 'purple'},
+          },
+          dates: {start: new Date(2021, 0, 7), end: new Date(2021, 0, 8)},
+          popover: {
+            label: "Delivery to client",
+            visibility: 'click'
+          }
+        },
+      ]
+    }
+  }
 };
 </script>
 
