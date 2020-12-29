@@ -6,6 +6,8 @@ import { createSupplier, showSupplierById, showSuppliers } from "../controllers/
 import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
 import { showAllEventTypes, showEventTypeById } from "../controllers/event_type.js"
 import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent, showAllOngoingEvents, updateEvent, showAllCompletedEvents, showAllPendingEvents, showCompletedEventsByAccount,} from "../controllers/event.js"
+import { showServiceByEventId, linkEventService } from "../controllers/event_service.js"
+import { showTasksByEventId, createTask } from "../controllers/task.js";
 
 // Initialize Router
 const router = express.Router();
@@ -42,7 +44,8 @@ router.get('/get_account_id/:username', showUserByName);
 router.get('/get_completed', showAllCompletedEvents);
 //Get completed Events by Account
 router.get('/get_completed/:id', showCompletedEventsByAccount);
-
+//Insert event service
+router.post('/link_event', linkEventService);
 
 // Admin routes
 // Get all employees to Admin View
@@ -87,6 +90,10 @@ router.get('/manager/suppliers/:id', showSupplierById);
 router.post('/manager/suppliers', createSupplier);
 //Update an Event
 router.put('/event_update/:id', updateEvent);
+//Get task by Event Id
+router.get('/get_tasks/:id', showTasksByEventId)
+//Create new task
+router.post('/create_task', createTask);
 
 //Employee routes
 //Get event based on employee id

@@ -78,7 +78,7 @@
                     <h3>Services Needed:</h3>
                 </div>
                 <div v-for="service in services"  :key="service.id" class="row checkbox">
-                    <b><label><input type="radio" name="service" v-bind:value="service.id"> {{service.name}} (PHP{{service.price}})</label></b>
+                    <b><label><input type="radio" name="service" v-bind:value="service.id" v-model="serviceName"> {{service.name}} (PHP{{service.price}})</label></b>
                     <p>{{service.description}}</p>
                 </div>
                 <div class="row checkbox">
@@ -113,7 +113,8 @@ export default {
       email: "",
       contactNum: "",
       eventType: "",
-      eventDate: "",  
+      eventDate: "",
+      serviceName: "",  
       services: [],
       event_types: [],
     };
@@ -155,6 +156,9 @@ export default {
                 event_date: this.eventDate,
                 status: "pending",
             });
+            // await axios.post("http://localhost:3000/link_event", {
+            //   event_id: 
+            // })
             this.eventName = "";
             this.eventDesc = "";
             this.contactNum = "";

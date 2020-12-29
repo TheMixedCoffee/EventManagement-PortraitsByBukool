@@ -81,10 +81,57 @@
               </a>
             </div>
           </div>
+           <div v-if="eventId != -1 && eventStatus != 'pending'" class="col-sm-3">
+            <h3>Task List</h3>
+            <a class="text-success" data-toggle="modal" data-target="#addTaskModal">Add Task <i class="fas fa-plus-circle fa-lg"></i></a>
+            <div>
+              <a class="list-group-item list-group-item-action" v-for="task in tasks" :key="task.id">
+                {{task.name}}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
+
+    <!--ADD TASK MODAL-->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="task_name">Task Name: </label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" id="task_name" v-model="task_name" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="start_date">Start Date: </label>
+                        <div class="col-sm-8">
+                          <input type="date" class="form-control" id="start_date" v-model="start_date" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="end_date">End Date: </label>
+                        <div class="col-sm-8">
+                          <input type="date" class="form-control" id="end_date" v-model="end_date" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" @click="addTask" data-dismiss="modal">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
   </div>
 </template>
@@ -114,8 +161,12 @@ export default {
       eventName: "",
       eventDetails: "",
       eventStatus: "",
+      task_name: "",
+      start_date: "",
+      end_date: "",
       ongoingEvents: [],
       pendingEvents: [],
+      tasks: [],
       services: [],
       incId: todos.length,
       todos,
@@ -126,6 +177,7 @@ export default {
     this.getOngoingEvents();
     this.getServices();
     this.getPendingEvents();
+    this.getTasks();
   },
 
   methods: {
@@ -158,6 +210,15 @@ export default {
         console.log(err);
       }
     },
+    async getTasks(id){
+      try{
+        const response = await axios.get(`http://localhost:3000/get_tasks/${id}`);
+        console.log(response);
+        this.tasks = response.data;
+      }catch (err){
+        console.log(err);
+      }
+    },
     async showEvent(id){
       try {
         const response = await axios.get(`http://localhost:3000/event/${id}`)
@@ -171,6 +232,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
+      this.getTasks(id);
     },
     async acceptEvent(id){
       try{
@@ -195,6 +257,24 @@ export default {
         this.getOngoingEvents();
         this.getPendingEvents();
       }catch (err){
+        console.log(err);
+      }
+    },
+    async addTask(){
+      try{
+        await axios.post("http://localhost:3000/create_task", {
+          name: this.task_name,
+          start_date: this.start_date,
+          end_date: this.end_date,
+          employee_id: 21, //PLACE HOLDER
+          event_id: this.eventId,
+          status: "ongoing",
+        })
+        this.task_name =  "";
+        this.start_date = "";
+        this.end_date = "";
+        this.getTasks(this.eventId);
+      } catch (err) {
         console.log(err);
       }
     }

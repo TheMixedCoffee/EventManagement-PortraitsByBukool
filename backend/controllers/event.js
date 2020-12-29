@@ -1,4 +1,4 @@
-import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById, getOngoingEvent, getPendingEvent, getCompletedEvent, updateEventById, insertEvent } from '../models/eventModel.js'
+import { getAllEvents, getEventByAccountId, getEventByEmployeeId, getEventById, getOngoingEvent, getPendingEvent, getCompletedEvent, updateEventById, insertEvent, getCompletedEventByAccount } from '../models/eventModel.js'
 
 export const showAllEvents = (req,res) => {
     getAllEvents((err, results) => {

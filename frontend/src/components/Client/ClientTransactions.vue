@@ -33,7 +33,7 @@
       <div>
         <h1>Transactions</h1>
          <a class="list-group-item list-group-item-action" v-for="event in events" :key="event.id">
-            {{event.event_name}} {{event.event_date}}
+            {{event.event_name}} ||  {{event.event_date}}
         </a>
       </div>
     </div>
