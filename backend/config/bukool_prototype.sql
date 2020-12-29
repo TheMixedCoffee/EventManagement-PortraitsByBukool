@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 10:33 PM
+-- Generation Time: Dec 29, 2020 at 06:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -89,7 +89,7 @@ CREATE TABLE `event` (
 INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`, `status`) VALUES
 (1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 27, '2020-12-16', 'ongoing'),
 (2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'ongoing'),
-(5, 10, 'Sam and Diana\'s Wedding', 'A wedding for Sam and Diana', '09771413131', 1, -1, '2020-12-31', 'pending'),
+(5, 10, 'Sam and Diana\'s Wedding', 'A wedding for Sam and Diana', '09771413131', 1, -1, '2020-12-31', 'completed'),
 (6, 10, 'Mona\'s Debut', 'A debut for Mona', '09771413131', 2, -1, '2021-01-22', 'pending'),
 (7, 10, 'Klee\'s Birthday Party', 'Very nice', '09441321', 3, -1, '2021-02-24', 'pending');
 
@@ -210,8 +210,17 @@ CREATE TABLE `tasks` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL
+  `event_id` int(11) NOT NULL,
+  `status` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `name`, `start_date`, `end_date`, `employee_id`, `event_id`, `status`) VALUES
+(1, 'Photoshoot', '2020-12-29', '2020-12-31', 21, 1, 'ongoing'),
+(2, 'Edit Photos', '2021-01-01', '2021-01-03', 21, 1, 'ongoing');
 
 -- --------------------------------------------------------
 
@@ -357,7 +366,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
