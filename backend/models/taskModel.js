@@ -28,10 +28,20 @@ export const insertTask = (data, result) => {
 }
 
 export const updateTaskStatus = (status, id, result) =>{
-    db.query(`UPDATE task SET status = '${status}', WHERE id = ${id}`, (err, results)=>{
+    db.query(`UPDATE tasks SET status = '${status}' WHERE id = ${id}`, (err, results)=>{
         if (err) throw err;
         else {
-            results(null, results);
+            result(null, results);
+        }
+    })
+}
+
+export const getTaskByEmployeeId = (id, result) => {
+    db.query(`SELECT * FROM tasks WHERE employee_id = ? && status = 'ongoing' ORDER BY start_date`, [id], (err, results) => {
+        if (err) {
+            throw err;
+        } else {
+            result(null, results);
         }
     })
 }

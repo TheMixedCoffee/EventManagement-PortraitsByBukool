@@ -30,6 +30,9 @@
 
       <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
+      <div style="float: right;">
+        <span>{{account.firstname}} {{account.lastname}} </span><i class="fas fa-user-circle fa-lg"></i>
+      </div>
       <div>
         <h1>Events</h1>
         <br>
@@ -79,6 +82,7 @@ export default {
       account_id: -1,
       events: [],
       services: [],
+      account: [],
     };
   },
 
@@ -87,9 +91,18 @@ export default {
     console.log("The account id is: " + this.account_id);
     this.getEvents();
     this.getServices();
+    this.getAccount();
   },
 
   methods: {
+    async getAccount() {
+      try {
+        const response = await axios.get(`http://localhost:3000/user/${this.account_id}`)
+        this.account = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getServices() {
       try {
         const response = await axios.get("http://localhost:3000/services");

@@ -1,4 +1,4 @@
-import { getTaskById, getTasksByEventId, insertTask, updateTaskStatus } from '../models/taskModel.js'
+import { getTaskByEmployeeId, getTaskById, getTasksByEventId, insertTask, updateTaskStatus } from '../models/taskModel.js'
 
 export const showTaskById = (req,res) => {
     getTaskById(req.params.id, (err, results) => {
@@ -34,6 +34,16 @@ export const setTaskComplete = (req,res)=>{
     updateTaskStatus(status, id, (err, results)=>{
         if (err) throw err;
         else{
+            res.json(results);
+        }
+    })
+}
+
+export const showTaskByEmployee = (req,res) => {
+    getTaskByEmployeeId(req.params.id, (err, results) => {
+        if (err) {
+            throw err;
+        } else {
             res.json(results);
         }
     })

@@ -53,8 +53,8 @@
                 <h4>{{ contactName }}</h4>
                 <p style="whitespace: pre">{{ contactDescription }}</p>
                 <p>{{ contactNum }}</p>
-                <button type="button" v-if="clicked == 'clicked'" class="btn btn-danger mr-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                <button type="button" v-if="clicked == 'clicked'" class="btn btn-info" data-toggle="modal" data-target="#updateContactModal">Update</button>
+                <button type="button" v-if="clicked == 'clicked'" class="btn btn-danger mr-1 mb-2" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                <button type="button" v-if="clicked == 'clicked'" class="btn btn-info mb-2" data-toggle="modal" data-target="#updateContactModal">Update</button>
               </div>
             </div>
               </div>

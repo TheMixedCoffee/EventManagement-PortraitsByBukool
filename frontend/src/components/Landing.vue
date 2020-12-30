@@ -214,7 +214,7 @@
                             Sign Up to Subscribe to Portraits by Bukool and receive
                             notifications of our new posts by email
                         </p>
-                        <form>
+                        <form action="/register">
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email Address</label>

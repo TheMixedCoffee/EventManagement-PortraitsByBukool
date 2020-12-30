@@ -7,7 +7,7 @@ import { showContacts, showContactById, createContact, updateContact, deleteCont
 import { showAllEventTypes, showEventTypeById } from "../controllers/event_type.js"
 import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent, showAllOngoingEvents, updateEvent, showAllCompletedEvents, showAllPendingEvents, showCompletedEventsByAccount,} from "../controllers/event.js"
 import { showServiceByEventId, linkEventService } from "../controllers/event_service.js"
-import { showTasksByEventId, createTask } from "../controllers/task.js";
+import { showTasksByEventId, createTask, showTaskByEmployee, showTaskById, setTaskComplete } from "../controllers/task.js";
 
 // Initialize Router
 const router = express.Router();
@@ -98,6 +98,12 @@ router.post('/create_task', createTask);
 //Employee routes
 //Get event based on employee id
 router.get('/employee/events/:id', showEventByEmployee);
+//Get tasks based on employee id
+router.get('/employee/tasks/:id', showTaskByEmployee);
+//Get task by Task Id
+router.get('/employee/get_task/:id', showTaskById);
+//Update task into complete
+router.put('/employee/tasks/:id', setTaskComplete);
 
 //Export default router
 export default router;

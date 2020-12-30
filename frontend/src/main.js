@@ -21,14 +21,16 @@ import ClientReservation from './components/Client/ClientReservation.vue'
 import AdminServices from './components/Admin/AdminServices.vue'
 import AdminContacts from './components/Admin/AdminContacts.vue'
 import AdminEmployees from './components/Admin/AdminEmployees.vue'
+import AdminInbox from './components/Admin/AdminInbox.vue'
 // Manager components
 import ManagerEvents from './components/Manager/ManagerEvents.vue'
 import ManagerEmployees from './components/Manager/ManagerEmployees.vue'
 import ManagerSuppliers from './components/Manager/ManagerSuppliers.vue'
 import ManagerDeliveries from './components/Manager/ManagerDeliveries.vue'
+import ManagerInbox from './components/Manager/ManagerInbox.vue'
 // Employee components
 import EmployeeEvents from './components/Employee/EmployeeEvents.vue'
-
+import EmployeeInbox from './components/Employee/EmployeeInbox.vue'
 
 Vue.use(VueRouter)
 Vue.use(VCalendar)
@@ -99,6 +101,11 @@ const routes = [
     path: '/admin/employees',
     component: AdminEmployees
   },
+  {
+    name: 'AdminInbox',
+    path: '/admin/inbox',
+    component: AdminInbox
+  },
   // manager routes
   {
     name: 'ManagerEmployees',
@@ -120,11 +127,21 @@ const routes = [
     path: '/manager/deliveries',
     component: ManagerDeliveries
   },
+  {
+    name: 'ManagerInbox',
+    path: '/manager/inbox',
+    component: ManagerInbox
+  },
   // employee routes
   {
     name: 'EmployeeEvents',
-    path: '/employee/events',
+    path: '/employee/events/:id',
     component: EmployeeEvents
+  },
+  {
+    name: 'EmployeeInbox',
+    path: '/employee/inbox',
+    component: EmployeeInbox
   },
 ]
 

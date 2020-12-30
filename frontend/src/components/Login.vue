@@ -28,6 +28,7 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" @click="loginUser">LOGIN</button>
+            <a href="/register" class="btn btn-outline-primary ml-2">SIGNUP</a>
           </div>
         </div>
       </div>

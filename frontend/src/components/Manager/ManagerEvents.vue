@@ -124,6 +124,15 @@
                           <input type="date" class="form-control" id="end_date" v-model="end_date" required>
                         </div>
                       </div>
+                      <div class="form-group row">
+                        <label for="col-sm-4 col-form-label">Select Employee: </label>
+                        <div class="col-sm-8">
+                          <select name="employee_id" id="" v-model="employee_id" class="form-control">
+                            <option selected="true" disabled="disabled">Choose...</option>
+                            <option v-for="employee in employees" :key="employee.id" :value='employee.id' >{{ employee.firstname }} {{ employee.lastname }}</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,12 +173,14 @@ export default {
       task_name: "",
       start_date: "",
       end_date: "",
+      employee_id: "",
       ongoingEvents: [],
       pendingEvents: [],
       tasks: [],
       services: [],
       incId: todos.length,
       todos,
+      employees: [],
     };
   },
 
@@ -178,6 +189,7 @@ export default {
     this.getServices();
     this.getPendingEvents();
     this.getTasks();
+    this.getEmployees();
   },
 
   methods: {
@@ -266,7 +278,7 @@ export default {
           name: this.task_name,
           start_date: this.start_date,
           end_date: this.end_date,
-          employee_id: 21, //PLACE HOLDER
+          employee_id: this.employee_id, //PLACE HOLDER
           event_id: this.eventId,
           status: "ongoing",
         })
@@ -274,6 +286,14 @@ export default {
         this.start_date = "";
         this.end_date = "";
         this.getTasks(this.eventId);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getEmployees() {
+      try {
+        const response = await axios.get("http://localhost:3000/manager/employees");
+        this.employees = response.data;
       } catch (err) {
         console.log(err);
       }

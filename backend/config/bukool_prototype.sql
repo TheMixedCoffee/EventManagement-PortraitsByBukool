@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2020 at 06:46 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Dec 30, 2020 at 01:55 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -38,6 +37,9 @@ CREATE TABLE `assigned_event` (
 --
 
 INSERT INTO `assigned_event` (`event_id`, `employee_id`) VALUES
+(1, 11),
+(1, 12),
+(2, 11),
 (1, 11),
 (1, 12),
 (2, 11);
@@ -87,11 +89,8 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`, `status`) VALUES
-(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 27, '2020-12-16', 'ongoing'),
-(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'ongoing'),
-(5, 10, 'Sam and Diana\'s Wedding', 'A wedding for Sam and Diana', '09771413131', 1, -1, '2020-12-31', 'completed'),
-(6, 10, 'Mona\'s Debut', 'A debut for Mona', '09771413131', 2, -1, '2021-01-22', 'pending'),
-(7, 10, 'Klee\'s Birthday Party', 'Very nice', '09441321', 3, -1, '2021-02-24', 'pending');
+(1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 1, '2020-12-16', 'ongoing'),
+(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'pending');
 
 -- --------------------------------------------------------
 
@@ -195,8 +194,19 @@ CREATE TABLE `supplier` (
   `company_name` varchar(255) NOT NULL,
   `contact_person` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `contact_number` int(32) NOT NULL
+  `contact_number` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`id`, `company_name`, `contact_person`, `description`, `contact_number`, `email`) VALUES
+(1, 'Shopify', 'Robert Magno', 'From creating designs to building your online store. Shopify has everything you need to start a business using print-on-demand.', '+639563328746', 'shopifyprint@gmail.com'),
+(2, 'Hannahs Cake Decors And Party Needs', 'Hannah Montana', 'Hannah\'s Cake Decors and Party Needs is your one stop party shop! When it comes to party needs Hannah\'s is the place, Hannah\'s is the biggest party needs provider in Cebu and has the best balloons in Cebu when it comes to quality.', '(032) 412-5010', 'hannahparty@gmail.com'),
+(3, 'Williams Printing & Packaging', 'William Jones', 'Williams Printing & Packaging provides quality packaging solutions such as boxes, labels, and stickers.', '(032) 231 3275', '\r\nsales@wcci.com.ph'),
+(4, 'Elijah Advertising', 'Sir Jomar Samson', 'With print capabilities from the latest digital print through to 8-color on a sheet up to the most largest possible scale formats, we operate daily to met your deadlines with a smile.', '(032) 268-3712', 'production.elijahadvertising@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -219,8 +229,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `name`, `start_date`, `end_date`, `employee_id`, `event_id`, `status`) VALUES
-(1, 'Photoshoot', '2020-12-29', '2020-12-31', 21, 1, 'ongoing'),
-(2, 'Edit Photos', '2021-01-01', '2021-01-03', 21, 1, 'ongoing');
+(1, 'Photoshoot', '2020-12-29', '2020-12-31', 19, 1, 'ongoing'),
+(2, 'Edit Photos', '2021-01-01', '2021-01-03', 20, 1, 'ongoing'),
+(3, 'Meeting with the client', '2020-12-30', '2021-01-01', 24, 1, 'ongoing'),
+(5, 'Preparation of Venue', '2020-12-22', '2020-12-24', 19, 1, 'ongoing');
 
 -- --------------------------------------------------------
 
@@ -250,12 +262,9 @@ INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `emai
 (8, 'manager1', '$2b$10$dBhOFDLmDU3EYKeFMmkFcuKZSH6VvOehxbjyLHXxDCA9KFRfm/fCW', 'Isaiah', 'Quinicot', 'manager@manager.com', '', 'manager', ''),
 (9, 'admin1', '$2b$10$E5CuM/bJ98P9l8m2lRHxRuz/BKjPslVlhZOA.Zo0Itk.71UiYbHDW', 'Marc Lloyd', 'Quisel', 'admin@admin.com', '', 'admin', ''),
 (10, 'keqing', '$2b$10$Ep8k0EjeYEB.puWy6PBOauYQfYTpBg/IMKSEI1t0euFvU3KISZ8um', 'Keqing', 'Waifu', 'email@email.com', '', 'client', ''),
-(16, 'saemployee', '$2b$10$A/2CaMe3rIMxj.WW6bNOQuS47PZqb/I.Mz0xX5wX2RU1iwy2PpmOu', 'Sample', 'Employee', 'sample@gmail.com', '09563325649', 'employee', 'Photographer'),
-(17, 'pacologne', '$2b$10$aFQLeCfUh.dBrt4m0qKfgOjaXsNzt1UYt5QbuOPJmVm85C6lI.dsu', 'Papa', 'Cologne', 'papacol@gmail.com', '+639458256588', 'employee', 'Videographer'),
 (19, 'bemansell', '$2b$10$fvu0rMD96yXKaVLLMhUFFeIcZLOPnpZHHB/aUqLZDGN0aNGuddwVu', 'Benito', 'Mansell', 'benito@gmail.com', '+6395462231', 'employee', 'Photographer'),
 (20, 'jaknapp', '$2b$10$EYhycRK0EJaaDT657sFwteNR1mdYJqfva./3o4E0FJL2Czd9bQfcy', 'Jadine', 'Knapp', 'jadine@gmail.com', '09542263587', 'employee', 'Videographer'),
-(21, 'jodoe', '$2b$10$22YWum6YmK56tTuRDf767.zkC8pfGKXCLkDuQlkuXjnW1MfJ5T7ai', 'John', 'Doe', 'johndoe@gmail.com', '1234123412', 'employee', 'Editor'),
-(22, 'jadoe', '$2b$10$h5QjJhYznP1KGaO3pV7lseE8w0khCp267PquiiI9dmY.b4W8Uj32i', 'Jane', 'Doe', 'janedoe@gmail.com', '3213124324234', 'employee', 'Photographer');
+(24, 'roclarke', '$2b$10$rh3LKStJEpWkqlFNco07W.ZUOy1qYEebVP0k3ZTvCEiPq9aJqcR9O', 'Rory', 'Clarke', 'rory_clarke@gmail.com', '09563321546', 'employee', 'Editor');
 
 --
 -- Indexes for dumped tables
@@ -360,19 +369,19 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -398,13 +407,6 @@ ALTER TABLE `event_services`
 ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tasks`
---
-ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
