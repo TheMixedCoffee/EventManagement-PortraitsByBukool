@@ -10,7 +10,7 @@
       <div class="mb-5">
       <ul class="list-unstyled components mb-5">
         <li class="active">
-          <a href="/client/events"><span class="fa fa-calendar mr-3"></span> Events</a>
+          <a @click="redirect('ClientEvents')"><span class="fa fa-calendar mr-3"></span> Events</a>
         </li>
         <li>
           <a href="/client/transactions"><span class="fas fa-file-invoice mr-3"></span> Transactions</a>
@@ -46,18 +46,6 @@
                     <label class="col-sm-4 col-form-label" for="event_desc">Event Description: </label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control border border-info" id="event_desc" v-model="eventDesc" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="email">Email: </label>
-                    <div class="col-sm-8">
-                        <input type="email" class="form-control border border-info" id="email" v-model="email"  required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="contact_number">Contact Number: </label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control border border-info" id="contact_number" v-model="contactNum"  required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -117,15 +105,35 @@ export default {
       serviceName: "",  
       services: [],
       event_types: [],
+      account_id: -1,
+      account: [],
     };
   },
 
   created() {
+    this.account_id = this.$route.params.id;
+    console.log("The account id is: " + this.account_id);
     this.getEventTypes();
     this.getServices();
+    this.getAccount();
   },
 
   methods: {
+    async redirect(path){
+      try{
+        this.$router.push({name: path, params: {id: this.account_id}});
+      }catch (err){
+        console.log(err);
+      }
+    },
+    async getAccount() {
+      try {
+        const response = await axios.get(`http://localhost:3000/user/${this.account_id}`)
+        this.account = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getEventTypes() {
       try {
         const response = await axios.get("http://localhost:3000/event_types");
@@ -147,10 +155,10 @@ export default {
     async addEvent() {
         try {
             await axios.post("http://localhost:3000/create_event", {
-                account_id: 10, //MANUALLY ADDED VALUE FOR TESTING PURPOSES
+                account_id: this.account_id, //MANUALLY ADDED VALUE FOR TESTING PURPOSES
                 event_name: this.eventName,
                 event_details: this.eventDesc,
-                contact_number: this.contactNum,
+                contact_number: this.account.contact,
                 event_type_id: this.eventType,
                 employee_id: -1,
                 event_date: this.eventDate,

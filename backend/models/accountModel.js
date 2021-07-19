@@ -33,6 +33,16 @@ export const insertUser = (data, result) => {
     });
 }
 
+export const updateUser = (data, result) => {
+    db.query(`UPDATE user SET password = "${data.password}" WHERE username = "${data.username}"`, (err, results) => {
+        if(err) {
+            throw err;
+        } else {
+            result(null, results[0]);
+        }
+    })
+}
+
 export const insertEmployee = (data, result) => {
     db.query(`INSERT INTO user (username, password, firstname, lastname, email, contact, user_type, employee_type) VALUES (
         "${data.username}", "${data.password}", "${data.firstname}",

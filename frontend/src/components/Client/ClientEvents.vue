@@ -45,7 +45,7 @@
               </a>
             </div>
             <div class="mt-5 mx-auto">
-              <a href="/client/reservation">
+              <a @click="reserveEvent">
                 <button class="btn btn-success">Reserve an Event</button>
               </a>
             </div> 
@@ -95,6 +95,13 @@ export default {
   },
 
   methods: {
+    async reserveEvent() {
+      try {
+        this.$router.push({name: "ClientReservation", params: {id: this.account_id}})
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getAccount() {
       try {
         const response = await axios.get(`http://localhost:3000/user/${this.account_id}`)

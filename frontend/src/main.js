@@ -13,6 +13,7 @@ import Login from './components/Login.vue'
 import Landing from './components/Landing.vue'
 import Packages from './components/Packages.vue'
 import About from './components/About.vue'
+import ForgetPassword from './components/ForgetPassword.vue'
 // Client components
 import ClientEvents from './components/Client/ClientEvents.vue'
 import ClientTransactions from './components/Client/ClientTransactions.vue'
@@ -69,6 +70,11 @@ const routes = [
     path: '/login',
     component: Login
   },
+  {
+    name: 'ForgetPassword',
+    path: '/forgetpassword',
+    component: ForgetPassword
+  },
   // client routes
   {
     name: 'ClientEvents',
@@ -82,7 +88,7 @@ const routes = [
   },
   {
     name: 'ClientReservation',
-    path: '/client/reservation',
+    path: '/client/reservation/:id',
     component: ClientReservation
   },
   // admin routes

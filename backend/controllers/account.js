@@ -1,4 +1,4 @@
-import { getUsers, getUserById, insertUser, checkUser, checkUserEmail, getEmployees, getAssignEvents, deleteUserById, insertEmployee } from "../models/accountModel.js";
+import { getUsers, getUserById, insertUser, checkUser, checkUserEmail, getEmployees, getAssignEvents, deleteUserById, insertEmployee, updateUser } from "../models/accountModel.js";
 
 import bcrypt from "bcrypt";
 import { saltRounds }  from '../app.js';
@@ -29,6 +29,19 @@ export const createUser = (req, res) => {
     req.body.password = hash;
     const data = req.body;
     insertUser(data, (err, results) => {
+        if (err) throw err;
+        else {
+            res.json(results);
+        }
+    })
+}
+
+export const resetPassword = (req, res) => {
+    let salt = bcrypt.genSaltSync(saltRounds);
+    let hash = bcrypt.hashSync(req.body.password, salt);
+    req.body.password = hash;
+    const data = req.body;
+    updateUser(data, (err, results) => {
         if (err) throw err;
         else {
             res.json(results);

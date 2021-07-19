@@ -1,6 +1,6 @@
 import express from "express";
 
-import { showUsers, showUserById, createUser, authUser, showUserByName, showEmployees, showAssignedEvents, deleteUser, createEmployee, showUserByEmail } from "../controllers/account.js";
+import { showUsers, showUserById, createUser, authUser, showUserByName, showEmployees, showAssignedEvents, deleteUser, createEmployee, showUserByEmail, resetPassword } from "../controllers/account.js";
 import { showServices, showServiceById, createService, deleteService, updateService } from "../controllers/service.js"
 import { createSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
 import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
@@ -20,6 +20,8 @@ router.get('/user/:id', showUserById);
 router.post('/register', createUser);
 // Login User
 router.post('/login', authUser);
+// Reset Password
+router.post('/resetpassword', resetPassword)
 // Get all services
 router.get('/services', showServices);
 // Get all event types
