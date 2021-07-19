@@ -20,10 +20,12 @@ export const getTaskById = (id, result) => {
 
 export const insertTask = (data, result) => {
     db.query("INSERT INTO tasks SET ?", [data], (err, results) => {
-        if (err) throw err;
-        else {
-            result(null, results);
-        }
+        db.query(`INSERT INTO assigned_event SET event_id = "${data.event_id}", employee_id = "${data.employee_id}"`, (err, results) => {
+            if (err) throw err;
+            else {
+                result(null, results);
+            }
+        })
     })
 }
 

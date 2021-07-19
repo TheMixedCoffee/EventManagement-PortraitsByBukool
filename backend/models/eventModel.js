@@ -87,7 +87,7 @@ export const insertEvent = (data, result) => {
 }
 
 export const updateEventById = (data, id, result) => {
-    db.query(`UPDATE event SET event_name = '${data.event_name}', event_details = '${data.event_details}', 
+    db.query(`UPDATE event SET event_name = "${data.event_name}", event_details = '${data.event_details}', 
         status = '${data.status}' WHERE id = ${id}`, 
         (err, results) => {
             if (err) {
