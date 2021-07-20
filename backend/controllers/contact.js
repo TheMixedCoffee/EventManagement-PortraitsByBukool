@@ -1,4 +1,4 @@
-import {getContacts, getContactById, insertContact, updateContactById, deleteContactById} from "../models/contactModel.js";
+import {getContacts, getContactById, getContactNumbers, insertContact, updateContactById, deleteContactById} from "../models/contactModel.js";
 
 export const showContacts = (req,res)=>{
     getContacts((err, results)=>{
@@ -11,6 +11,15 @@ export const showContacts = (req,res)=>{
 
 export const showContactById = (req,res)=>{
     getContactById(req.params.id, (err,results)=>{
+        if (err) throw err;
+        else{
+            res.json(results);
+        }
+    })
+}
+
+export const showContactNumbers = (req,res)=>{
+    getContactNumbers(req.params.id, (err,results)=>{
         if (err) throw err;
         else{
             res.json(results);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2020 at 01:55 AM
+-- Generation Time: Jul 20, 2021 at 08:21 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -42,7 +42,8 @@ INSERT INTO `assigned_event` (`event_id`, `employee_id`) VALUES
 (2, 11),
 (1, 11),
 (1, 12),
-(2, 11);
+(2, 11),
+(2, 19);
 
 -- --------------------------------------------------------
 
@@ -69,6 +70,30 @@ INSERT INTO `contact` (`id`, `contact_name`, `contact_number`, `contact_desc`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact_number`
+--
+
+CREATE TABLE `contact_number` (
+  `id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `number` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contact_number`
+--
+
+INSERT INTO `contact_number` (`id`, `contact_id`, `number`) VALUES
+(4, 1, '+639563328746'),
+(5, 2, '(032) 412-5010'),
+(6, 3, '(032) 231 3275'),
+(7, 4, '(032) 268-3712'),
+(12, 2, '5589646'),
+(13, 3, '+639230982273');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `event`
 --
 
@@ -90,7 +115,9 @@ CREATE TABLE `event` (
 
 INSERT INTO `event` (`id`, `account_id`, `event_name`, `event_details`, `contact_number`, `event_type_id`, `employee_id`, `event_date`, `status`) VALUES
 (1, 10, 'Keqing\'s Debut', 'Theme: dogs', '0922384736', 1, 1, '2020-12-16', 'ongoing'),
-(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'pending');
+(2, 7, 'Marc & Keqing Prenup', 'Idk what this is', '+639564259762', 1, 1, '2020-12-23', 'ongoing'),
+(8, 10, 'Tester\'s Event', 'Wedding anniversary of my parents.', '09456772847', 4, -1, '2021-05-25', 'completed'),
+(9, 25, 'Test Event', 'This is a test event', '9151554554', 3, -1, '2021-07-21', 'ongoing');
 
 -- --------------------------------------------------------
 
@@ -232,7 +259,10 @@ INSERT INTO `tasks` (`id`, `name`, `start_date`, `end_date`, `employee_id`, `eve
 (1, 'Photoshoot', '2020-12-29', '2020-12-31', 19, 1, 'ongoing'),
 (2, 'Edit Photos', '2021-01-01', '2021-01-03', 20, 1, 'ongoing'),
 (3, 'Meeting with the client', '2020-12-30', '2021-01-01', 24, 1, 'ongoing'),
-(5, 'Preparation of Venue', '2020-12-22', '2020-12-24', 19, 1, 'ongoing');
+(5, 'Preparation of Venue', '2020-12-22', '2020-12-24', 19, 1, 'ongoing'),
+(6, 'Photoshoot', '2021-05-26', '2021-05-28', 20, 2, 'ongoing'),
+(7, 'Video shoot', '2021-05-27', '2021-05-29', 19, 2, 'ongoing'),
+(8, 'Meet with Client', '2021-05-25', '2021-05-27', 19, 2, 'ongoing');
 
 -- --------------------------------------------------------
 
@@ -264,7 +294,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `emai
 (10, 'keqing', '$2b$10$Ep8k0EjeYEB.puWy6PBOauYQfYTpBg/IMKSEI1t0euFvU3KISZ8um', 'Keqing', 'Waifu', 'email@email.com', '', 'client', ''),
 (19, 'bemansell', '$2b$10$fvu0rMD96yXKaVLLMhUFFeIcZLOPnpZHHB/aUqLZDGN0aNGuddwVu', 'Benito', 'Mansell', 'benito@gmail.com', '+6395462231', 'employee', 'Photographer'),
 (20, 'jaknapp', '$2b$10$EYhycRK0EJaaDT657sFwteNR1mdYJqfva./3o4E0FJL2Czd9bQfcy', 'Jadine', 'Knapp', 'jadine@gmail.com', '09542263587', 'employee', 'Videographer'),
-(24, 'roclarke', '$2b$10$rh3LKStJEpWkqlFNco07W.ZUOy1qYEebVP0k3ZTvCEiPq9aJqcR9O', 'Rory', 'Clarke', 'rory_clarke@gmail.com', '09563321546', 'employee', 'Editor');
+(24, 'roclarke', '$2b$10$rh3LKStJEpWkqlFNco07W.ZUOy1qYEebVP0k3ZTvCEiPq9aJqcR9O', 'Rory', 'Clarke', 'rory_clarke@gmail.com', '09563321546', 'employee', 'Editor'),
+(25, 'test', '$2b$10$A1XIQFc9iJ4pqprcpBqWFOvlFh00hI.41FHVUL5Paflscv8fKSVlS', 'user', 'test', 'test@gmail.com', '9151554554', 'client', '');
 
 --
 -- Indexes for dumped tables
@@ -274,6 +305,12 @@ INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `lastname`, `emai
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact_number`
+--
+ALTER TABLE `contact_number`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -342,10 +379,16 @@ ALTER TABLE `contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `contact_number`
+--
+ALTER TABLE `contact_number`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `event_type`
@@ -369,19 +412,19 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

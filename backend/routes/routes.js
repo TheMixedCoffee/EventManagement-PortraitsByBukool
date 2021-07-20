@@ -2,8 +2,8 @@ import express from "express";
 
 import { showUsers, showUserById, createUser, authUser, showUserByName, showEmployees, showAssignedEvents, deleteUser, createEmployee, showUserByEmail, resetPassword } from "../controllers/account.js";
 import { showServices, showServiceById, createService, deleteService, updateService } from "../controllers/service.js"
-import { createSupplier, showSupplierById, showSuppliers } from "../controllers/supplier.js"
-import { showContacts, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
+import { createSupplier, showSupplierById, showSuppliers, showSupplierContacts, createSupplierContact } from "../controllers/supplier.js"
+import { showContacts, showContactNumbers, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
 import { showAllEventTypes, showEventTypeById } from "../controllers/event_type.js"
 import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent, showAllOngoingEvents, updateEvent, showAllCompletedEvents, showAllPendingEvents, showCompletedEventsByAccount,} from "../controllers/event.js"
 import { showServiceByEventId, linkEventService } from "../controllers/event_service.js"
@@ -68,6 +68,8 @@ router.put('/admin/services/:id', updateService);
 router.delete('/admin/services/:id', deleteService);
 //Get all contacts
 router.get('/admin/contact', showContacts);
+// Get all contact numbers
+router.get('/admin/contactnumber/:id', showContactNumbers);
 //Search for a specific contact
 router.get('/admin/contact/:id', showContactById);
 //Create contact
@@ -86,10 +88,14 @@ router.post('/manager/employees', createEmployee);
 router.get('/manager/employees/:id', showAssignedEvents);
 // Get all Supplier
 router.get('/manager/suppliers', showSuppliers);
+// Get all Contact Numbers
+router.get('/manager/contacts', showSupplierContacts);
 // Get Single Supplier
 router.get('/manager/suppliers/:id', showSupplierById);
 // Create New Supplier
 router.post('/manager/suppliers', createSupplier);
+// Create New Contact
+router.post('/manager/contacts', createSupplierContact);
 //Update an Event
 router.put('/event_update/:id', updateEvent);
 //Get task by Event Id

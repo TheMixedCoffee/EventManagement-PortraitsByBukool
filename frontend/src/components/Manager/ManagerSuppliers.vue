@@ -47,7 +47,10 @@
                 <div class="card h-100">
                       <h5 class="card-header">{{ supplier.company_name }}</h5>
                       <div class="card-body">
-                          <p class="card-text">Contact no: {{ supplier.contact_number }}</p>
+                          <p class="card-text">Contact no: <a class="text-primary" data-toggle="modal" data-target="#addContactModal" @click="getSupplierById(supplier.id)"><i class="fas fa-plus"></i></a></p>
+                          <div v-for="contact in contacts" :key="contact.id">
+                            <p v-if="contact.contact_id == supplier.id">{{contact.number}}</p>
+                          </div>
                       </div>
                       <div class="card-footer">
                           <a data-toggle="modal" data-target="#showSupplierModal" class="btn btn-primary text-white btn-sm" @click="getSupplierById(supplier.id)">Details</a>
@@ -125,6 +128,31 @@
               </div>
             </div>
           </div>
+          <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{ company_name }}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                  <div class="form-group row">
+                    <label class="col-sm-5 col-form-label" for="contact_number">New Contact Number: </label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="contact_number" v-model="new_contact_number" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" @click="addContact" data-dismiss="modal">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
   </div>
@@ -141,13 +169,17 @@ export default {
       contact_person: "",
       description: "",
       contact_number: "",
+      new_contact_number: "",
       email: "",
+      contact_id: "",
+      contacts: [],
       suppliers: [],
     };
   },
 
   created() {
     this.getSuppliers();
+    this.getContacts();
   },
 
   methods: {
@@ -160,15 +192,37 @@ export default {
         console.log(err);
       }
     },
+    async getContacts() {
+      try {
+        const response = await axios.get("http://localhost:3000/manager/contacts");
+        this.contacts = response.data;
+        console.log(this.contacts);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getSupplierById(id) {
       try {
         const response = await axios.get(`http://localhost:3000/manager/suppliers/${id}`)
+        this.contact_id = response.data.id;
         this.company_name = response.data.company_name;
         this.contact_person = response.data.contact_person;
         this.description = response.data.description;
         this.contact_number = response.data.contact_number;
         this.email = response.data.email;
         console.log(response.data);
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async addContact() {
+      try {
+        await axios.post(`http://localhost:3000/manager/contacts/`, {
+          contact_id: this.contact_id,
+          number: this.new_contact_number,
+        });
+        this.new_contact_number = "";
+        this.getSuppliers();
       } catch (err) {
         console.log(err)
       }

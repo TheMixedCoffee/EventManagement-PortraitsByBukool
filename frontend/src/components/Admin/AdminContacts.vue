@@ -44,7 +44,7 @@
               <div class="list-group col-sm-3">
                 <a class="list-group-item list-group-item-action active text-light">Contact List</a>
                 <div v-for="contact in contacts" :key="contact.id">
-                  <a class="list-group-item list-group-item-action" v-on:click="showContact(contact.id)"> {{contact.contact_name}} </a>
+                  <a class="list-group-item list-group-item-action" v-on:click="showContact(contact.id), showContactNumbers(contact.id)"> {{contact.contact_name}} </a>
                 </div>
               </div>
               <div class="col-sm-9 border">
@@ -53,6 +53,9 @@
                 <h4>{{ contactName }}</h4>
                 <p style="whitespace: pre">{{ contactDescription }}</p>
                 <p>{{ contactNum }}</p>
+                <!-- <div v-for="contactNumber in contactNumbers" :key="contactNumber.id">
+                  <p>{{ contactNumber.number }}</p>
+                </div> -->
                 <button type="button" v-if="clicked == 'clicked'" class="btn btn-danger mr-1 mb-2" data-toggle="modal" data-target="#deleteModal">Delete</button>
                 <button type="button" v-if="clicked == 'clicked'" class="btn btn-info mb-2" data-toggle="modal" data-target="#updateContactModal">Update</button>
               </div>
@@ -174,6 +177,7 @@ export default {
       contactDescription: "",
       clicked: "unclicked",
       contacts: [],
+      contactNumbers: [],
     };
   },
 
@@ -228,6 +232,15 @@ export default {
         console.log(err);
       }
     },
+    async showContactNumbers(id) {
+      try {
+        const response = await axios.get(`http://localhost:3000/admin/contactnumber/${id}`);
+        this.contactNumbers = response.data;
+        console.log(this.contactNumbers);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async updateContact(id){
       try {
         await axios.put(`http://localhost:3000/admin/contact/${id}`, {
@@ -244,6 +257,7 @@ export default {
       this.contactName = "";
       this.contactDescription = "";
       this.contactNum = "";
+      this.contactNumbers = [];
       this.clicked = "unclicked"
     }
   }

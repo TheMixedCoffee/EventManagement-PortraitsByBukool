@@ -20,6 +20,16 @@ export const getContactById = (id, result) =>{
     });
 }
 
+export const getContactNumbers = (id, result) =>{
+    db.query("SELECT * FROM contact_number WHERE contact_id = ?", [id], (err, results)=> {
+        if (err) {
+            throw err;
+        } else {
+            result(null, results);
+        }
+    })
+}
+
 export const insertContact = (data, result) => {
     db.query(`INSERT INTO contact (contact_name, contact_number, contact_desc) VALUES (
         "${data.contact_name}", '${data.contact_number}', "${data.contact_desc}")`, (err, results)=> {
