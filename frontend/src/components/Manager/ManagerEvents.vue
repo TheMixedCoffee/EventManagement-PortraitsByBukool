@@ -51,8 +51,8 @@
               </a>
             </div>
           </div>
-          <div class="col">
-            <h3>Event Details</h3>
+          <div v-if="eventId != -1" class="col">
+            <h3>{{eventName}} Details</h3>
             <div>
             Project Status: {{eventStatus}}
             <br>
@@ -79,6 +79,7 @@
               <a class="list-group-item list-group-item-action"  v-for="pending in pendingEvents" :key="pending.id" @click="showEvent(pending.id)">
                 {{pending.event_name}}
               </a>
+              <span v-if="pendingEvents.length == 0">None</span>
             </div>
           </div>
            <div v-if="eventId != -1 && eventStatus != 'pending'" class="col-sm-3">

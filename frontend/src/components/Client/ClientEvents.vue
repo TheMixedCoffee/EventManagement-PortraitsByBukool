@@ -50,8 +50,8 @@
               </a>
             </div> 
           </div>
-          <div class="col">
-            <h3>Event Details</h3>
+          <div v-if="eventId != -1" class="col">
+            <h3>{{eventName}} Details</h3>
             <div>
             Project Status: {{eventStatus}}
             <br>
@@ -76,6 +76,7 @@ export default {
   name: 'ClientEvents',
   data() {
     return {
+      eventId: -1,
       currentTask: "",
       eventStatus: "",
       managerName: "",
@@ -133,6 +134,7 @@ export default {
       try {
         const response = await axios.get(`http://localhost:3000/event/${id}`)
         console.log(response);
+        this.eventId = response.data.id;
         this.eventName = response.data.event_name;
         this.eventStatus = response.data.status;
         const calendar = this.$refs.calendar;

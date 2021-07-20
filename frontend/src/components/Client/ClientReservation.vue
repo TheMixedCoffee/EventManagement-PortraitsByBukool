@@ -74,9 +74,7 @@
                 </div>
                 <div class="row">
                     <button type="button" class="btn btn-success mr-5" @click="reserve()">Reserve Event</button>
-                    <a href="/client/events">
-                        <button type="button" class="btn btn-secondary">Go Back</button>
-                    </a>
+                        <button type="button" class="btn btn-secondary" @click="redirect('ClientEvents')">Go Back</button>
                 </div>
             </div>
       </div>
@@ -192,6 +190,8 @@ export default {
       try{
           //this.getUserId();
           this.addEvent();
+          this.redirect("ClientEvents");
+          alert("Reserved successfully");
       } catch (err) {
           console.log(err);
       }
