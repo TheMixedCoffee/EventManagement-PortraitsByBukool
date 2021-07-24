@@ -17,3 +17,12 @@ export const getEventTypeById = (id, result) => {
         }
     })
 }
+
+export const insertEventType = (data, result) => {
+    db.query("INSERT INTO event_type SET ?", [data], (err, results)=>{
+        if (err) throw err;
+        else{
+            result(null, results);
+        }
+    })
+}

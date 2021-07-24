@@ -4,9 +4,9 @@ import { showUsers, showUserById, createUser, authUser, showUserByName, showEmpl
 import { showServices, showServiceById, createService, deleteService, updateService } from "../controllers/service.js"
 import { createSupplier, showSupplierById, showSuppliers, showSupplierContacts, createSupplierContact } from "../controllers/supplier.js"
 import { showContacts, showContactNumbers, showContactById, createContact, updateContact, deleteContact} from "../controllers/contact.js"
-import { showAllEventTypes, showEventTypeById } from "../controllers/event_type.js"
+import { showAllEventTypes, showEventTypeById, createEventType } from "../controllers/event_type.js"
 import { showAllEvents, showEventByAccount, showEventByEmployee, showEventById, createEvent, showAllOngoingEvents, updateEvent, showAllCompletedEvents, showAllPendingEvents, showCompletedEventsByAccount,} from "../controllers/event.js"
-import { showServiceByEventId, linkEventService } from "../controllers/event_service.js"
+import { showServiceByEventId, linkEventService,} from "../controllers/event_service.js"
 import { showTasksByEventId, createTask, showTaskByEmployee, showTaskById, setTaskComplete } from "../controllers/task.js";
 
 // Initialize Router
@@ -66,6 +66,10 @@ router.post('/admin/services', createService);
 router.put('/admin/services/:id', updateService);
 // Delete a Service
 router.delete('/admin/services/:id', deleteService);
+//Get Event Types
+router.get('/admin/get_eventTypes', showAllEventTypes);
+//Create new Package Type
+router.post('/admin/create_eventType', createEventType);
 //Get all contacts
 router.get('/admin/contact', showContacts);
 // Get all contact numbers

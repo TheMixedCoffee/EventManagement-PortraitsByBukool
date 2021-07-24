@@ -16,9 +16,6 @@
             <a href="/manager/suppliers"><span class="fa fa-handshake-o mr-3"></span>Suppliers</a>
           </li>
           <li>
-            <a href="/manager/deliveries"><span class="fa fa-truck mr-3"></span> Deliveries</a>
-          </li>
-          <li>
             <a href="/manager/employees"><span class="fa fa-users mr-3"></span> Employees</a>
           </li>
           <li class="active">

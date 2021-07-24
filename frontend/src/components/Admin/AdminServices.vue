@@ -38,7 +38,9 @@
 			<div id="content" class="p-4 p-md-5 pt-5">
 				<div class="container">
           <h1>Services</h1>
-          <a class="text-success" data-toggle="modal" data-target="#addServiceModal" @click="reset()">Add Package <i class="fas fa-plus-circle fa-lg"></i></a>
+          <a class="text-success" data-toggle="modal" data-target="#addServiceModal" @click="reset()">Add Package  <i class="fas fa-plus-circle fa-lg"></i></a>
+          <br>
+          <a class="text-success" data-toggle="modal" data-target="#createServiceModal" @click="reset()">Create Package Type  <i class="fas fa-plus-circle fa-lg"></i></a>
           <br>
           <div class="row mb-4">
             <div class="list-group col-sm-3">
@@ -123,11 +125,7 @@
                     <label class="col-sm-4 col-form-label" for="event_type">Event Type</label>
                     <div class="col-sm-8">
                       <select class="form-control" id="event_type" v-model="packageType" required>
-                        <option selected="true" disabled="disabled" >Choose...</option>
-                        <option value="1">Wedding</option>
-                        <option value="2">Debut</option>
-                        <option value="3">Corporate Events</option>
-                        <option value="4">Personal Portfolio</option>
+                        <option v-for="event in eventTypes"  v-bind:key="event.id" v-bind:value="event.id">{{event.name}}</option>
                       </select>
                     </div>
                   </div>
@@ -171,11 +169,7 @@
                     <label class="col-sm-4 col-form-label" for="event_type">Event Type</label>
                     <div class="col-sm-8">
                       <select class="form-control" id="event_type" v-model="packageType" required>
-                        <option selected="true" disabled="disabled">Choose...</option>
-                        <option value="1">Wedding</option>
-                        <option value="2">Debut</option>
-                        <option value="3">Corporate Events</option>
-                        <option value="4">Personal Portfolio</option>
+                          <option v-for="event in eventTypes"  v-bind:key="event.id" v-bind:value="event.id">{{event.name}}</option>
                       </select>
                     </div>
                   </div>
@@ -206,9 +200,34 @@
               </div>
             </div>
           </div>
+          <div class="modal fade" id="createServiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Create Package Type</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                 <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="name">Name: </label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" v-model="newPackageType" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" @click="addEventType()" data-dismiss="modal">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 			</div>
 		</div>
+    
   
 </template>
 
@@ -224,17 +243,20 @@ export default {
       packageDescription: "",
       packagePrice: "",
       packageType: "",
+      newPackageType: "",
       weddingList: "unshow",
       debutList: "unshow",
       eventList: "unshow",
       portfolioList: "unshow",
       clicked: "unclicked",
       services: [],
+      eventTypes: [],
     };
   },
 
   created() {
     this.getServices();
+    this.getEventTypes();
   },
 
   methods: {
@@ -244,6 +266,15 @@ export default {
         this.services = response.data;
         console.log(this.services);
       } catch (err) {
+        console.log(err);
+      }
+    },
+    async getEventTypes(){
+      try{
+        const response = await axios.get("http://localhost:3000/admin/get_eventTypes");
+        this.eventTypes = response.data;
+        console.log(this.eventTypes);
+      } catch (err){
         console.log(err);
       }
     },
@@ -260,6 +291,17 @@ export default {
         this.packagePrice = "";
         this.packageType = "";
         this.getServices();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addEventType(){
+      try{
+        await axios.post("http://localhost:3000/admin/create_eventType", {
+          name: this.newPackageType
+        });
+        this.newPackageType = "";
+        this.getEventTypes();
       } catch (err) {
         console.log(err);
       }
@@ -333,7 +375,7 @@ export default {
       } else {
         this.portfolioList = "show";
       }
-    }, 
+    },
   },
 };
 </script>
