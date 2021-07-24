@@ -61,7 +61,7 @@
               <a class="text-success" @click="acceptEvent(eventId)">Reserve Event<i class="fas fa-plus-circle fa-lg"></i></a>
             </div> 
             <div v-else-if="eventStatus == 'ongoing'">
-              <a class="text-success" @click="doneEvent(eventId)">Mark as Completed<i class="fas fa-plus-circle fa-lg"></i></a>
+              <a class="text-success" @click="doneEvent(eventId)">Mark as Completed   <i class="fas fa-plus-circle fa-lg"></i></a>
             </div> 
           </div>
           <div class="col">
@@ -69,8 +69,10 @@
             </v-calendar>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-5">
+        <br>
+        <br>
+        <div class="row mt-3">
+          <div class="col-sm-3">
             <h3>Pending List</h3>
             <div>
               <a class="list-group-item list-group-item-action"  v-for="pending in pendingEvents" :key="pending.id" @click="showEvent(pending.id)">
@@ -79,7 +81,7 @@
               <span v-if="pendingEvents.length == 0">None</span>
             </div>
           </div>
-           <div v-if="eventId != -1 && eventStatus != 'pending'" class="col-sm-3">
+           <div v-if="eventId != -1 && eventStatus != 'pending'" class="col-sm-4">
             <h3>Task List</h3>
             <a class="text-success" data-toggle="modal" data-target="#addTaskModal">Add Task <i class="fas fa-plus-circle fa-lg"></i></a>
             <div>

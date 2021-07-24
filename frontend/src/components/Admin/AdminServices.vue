@@ -42,7 +42,7 @@
           <br>
           <a class="text-success" data-toggle="modal" data-target="#createServiceModal" @click="reset()">Create Package Type  <i class="fas fa-plus-circle fa-lg"></i></a>
           <br>
-          <div class="row mb-4">
+          <div class="row mt-2 mb-4">
             <div class="list-group col-sm-3">
               <a class="list-group-item list-group-item-action active text-light">Package List</a>
               <a class="list-group-item list-group-item-primary list-group-item-action" @click="showWedding(), reset()">Wedding
