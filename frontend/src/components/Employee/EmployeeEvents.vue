@@ -45,7 +45,7 @@
               </a>
             </div>
           </div>
-          <div class="col">
+          <div v-if="eventId != -1" class="col">
             <h3>Event Details</h3>
             <div>
             Project Name: {{eventName}}
